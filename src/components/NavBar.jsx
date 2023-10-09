@@ -18,7 +18,7 @@ function NavBar() {
                 : 'text-gray-400 text-sm hover:text-red-400'
             }
           >
-            Reminders
+            Recordatorios
           </NavLink>
         </li>
 
@@ -33,7 +33,7 @@ function NavBar() {
                 : 'text-gray-400 text-sm hover:text-red-400'
             }
           >
-            Settings
+            Configuraciones
           </NavLink>
         </li>
       </ul>
