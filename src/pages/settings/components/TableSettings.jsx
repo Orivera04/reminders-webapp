@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
-import { Thead } from "./Thead"
+import { Thead } from "../../../components/Thead"
+import { api } from "../../../api/reminderApi"
+import { deleteAlert } from "../../../api/sweetAlert"
 import { TableRow } from "./TableRow"
-
-// TODO: pendiente de utilizar variables de entorno para esta URL.
-// TODO: pendiente de pasar esta constante a un scope global.
-const api = axios.create({ baseURL: 'http://127.0.0.1:3000'})
 
 export const TableSettings = () => {
   const headers = [
@@ -29,17 +26,34 @@ export const TableSettings = () => {
       })
   }, [])
 
+  const handleDeleteSetting = (id) => {
+    deleteAlert(async () => {
+      try {
+        const result = await api.delete(`/settings/${id}`);
+        if(result.status === 200) {
+          let newData = [...data];
+          newData = newData.filter((element) => element.id !== id);
+          setData(newData);
+        } else {
+          console.error('Error:', result.status);
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    })
+  }
+
   return (
     <table className="min-w-full leading-normal">
-      <Thead headers={headers} />
-
+      <Thead headers={ headers } />
       <tbody>
         {
           data && data.map((element, _) => (
             <TableRow id={element.id}
                       apiTokenBot={ element.token_bot_api }
                       markDownId={ element.formatting_style_id }
-                      description={ element.description } />
+                      description={ element.description }
+                      handleDelete={ handleDeleteSetting }/>
           ))
         }
       </tbody>
