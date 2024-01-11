@@ -1,5 +1,4 @@
-import { Button } from "../components/Button"
-import { TableSettings } from "../components/TableSettings"
+import { Button, TableSettings } from "../components/index"
 
 export const SettingsPage = () => {
   return (

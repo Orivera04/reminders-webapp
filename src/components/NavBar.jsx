@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Separator } from './Separator';
+import { Separator } from './index';
 
 function NavBar() {
   return (

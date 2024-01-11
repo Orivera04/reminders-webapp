@@ -14,8 +14,6 @@ export const deleteAlert = (handleDelete) => {
       swal("Setting has been deleted!", {
         icon: "success",
       });
-    } else {
-      swal("Setting is safe!");
     }
   });
 }
