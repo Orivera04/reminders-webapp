@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Separator } from './Separator';
+import { Separator } from './index';
 
 function NavBar() {
   return (
@@ -18,7 +18,7 @@ function NavBar() {
                 : 'text-gray-400 text-sm hover:text-red-400'
             }
           >
-            Recordatorios
+            Reminders
           </NavLink>
         </li>
 
@@ -33,7 +33,7 @@ function NavBar() {
                 : 'text-gray-400 text-sm hover:text-red-400'
             }
           >
-            Configuraciones
+            Settings
           </NavLink>
         </li>
       </ul>
