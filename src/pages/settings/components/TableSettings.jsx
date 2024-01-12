@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import { Thead } from "../../../components/Thead"
-import { api } from "../../../api/reminderApi"
-import { deleteAlert } from "../../../api/sweetAlert"
+import { Thead } from "../../../components/"
 import { TableRow } from "./TableRow"
+import { api } from '../../../helper/api';
+import { deleteAlert } from '../../../helper';
 
 export const TableSettings = () => {
   const headers = [
     'ID',
-    'Token Api Bot',
-    'Estilo de formateo',
-    'Descripción',
-    'Acciones'
+    'Api Token Bot',
+    'Format Style',
+    'Description',
+    'Actions'
   ];
 
   const [data, setData] = useState(null);
