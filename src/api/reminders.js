@@ -5,7 +5,6 @@ export const getReminders = async () => {
     const response = await api.get('/reminders');
     const { data: { data: remindersList } } = response;
 
-    debugger;
     return remindersList.map(reminder => ({
       id: reminder.attributes.id,
       message: reminder.attributes.message,
@@ -19,3 +18,15 @@ export const getReminders = async () => {
     throw new Error('Error fetching reminders: ' + error.message);
   }
 };
+
+export const deleteReminder = async (reminderId) => {
+  try {
+    const response = await api.delete(`/reminders/${reminderId}`);
+    const { message } = response;
+
+    return message;
+  } catch (error) {
+    throw new Error('Error deleting reminder: ' + error.message);
+  }
+
+}

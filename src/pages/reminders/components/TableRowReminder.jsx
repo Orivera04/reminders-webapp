@@ -1,8 +1,6 @@
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ActionSection } from "../../../components"
 
-
-export const TableRowReminder = ({ id, chatID, message, reminderType, BotName }) => {
+export const TableRowReminder = ({ id, chatID, message, reminderType, BotName, handleDelete, handleUpdate }) => {
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -26,13 +24,9 @@ export const TableRowReminder = ({ id, chatID, message, reminderType, BotName })
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <button className="p-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white hover:text-gray-100 transition duration-300 ease-in-out">
-          <FontAwesomeIcon icon={faPenToSquare} />
-        </button>
-
-        <button className="p-2 rounded-full bg-red-500 hover:bg-red-600 text-white hover:text-gray-100 transition duration-300 ease-in-out ml-2">
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
+        <ActionSection id={ id }
+          handleDelete={ handleDelete }
+          handleUpdate={ handleUpdate } />
       </td>
     </tr>
   )
