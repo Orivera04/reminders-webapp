@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../settings/components"
 import { TableReminders } from "../components"
 
 export const RemindersPage = () => {
+  const navigate = useNavigate();
+
+  const onNewReminder = () => {
+    navigate("/reminders/new");
+  };
+
   return (
     <>
       <div className="flex justify-between items-center m-10">
@@ -8,7 +16,7 @@ export const RemindersPage = () => {
           <h1 className="text-2xl text-gray-800 text-center font-medium py-2">Reminders</h1>
         </div>
         <div className="text-right">
-          <button title='Create reminders' />
+          <Button title='Create Reminders' handleClick={ onNewReminder } />
         </div>
       </div>
 

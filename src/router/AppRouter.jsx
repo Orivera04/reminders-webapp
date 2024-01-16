@@ -5,7 +5,7 @@ import { SettingsRoutes } from "../pages/settings/router/SettingsRouter"
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/reminders" element={<RemindersRoutes />} />
+      <Route path="/reminders/*" element={<RemindersRoutes />} />
       <Route path="/settings" element={ <SettingsRoutes /> } />
 
       <Route path="*" element={<Navigate to="/reminders" replace={ true } />} />
