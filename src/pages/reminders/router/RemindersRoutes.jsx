@@ -7,6 +7,7 @@ export const RemindersRoutes = () => {
     <Routes>
       <Route path="/" element={<RemindersPage />} />
       <Route path="/new" element={<RemindersFormPage />} />
+      <Route path="/edit/:id" element={<RemindersFormPage />} />
     </Routes>
   )
 }

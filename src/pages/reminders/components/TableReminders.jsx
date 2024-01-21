@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { deleteReminder, getReminders } from "../../../api/reminders";
 import { Thead } from "../../../components";
 import { TableRowReminder } from "./TableRowReminder";
+import { useNavigate } from "react-router-dom";
 
 export const TableReminders = () => {
+  const navigate = useNavigate();
+
   const headers = [
     'ID',
     'Chat ID',
@@ -15,13 +18,11 @@ export const TableReminders = () => {
 
   const [reminders, setReminders] = useState(null);
 
-
   useEffect(() => {
     const storedReminders = JSON.parse(localStorage.getItem('storedReminders'));
 
     if (storedReminders === null) {
-      getReminders()
-      .then(response => {
+      getReminders().then(response => {
         setReminders(response);
         localStorage.setItem('storedReminders', JSON.stringify(response));
       })
@@ -37,7 +38,7 @@ export const TableReminders = () => {
 
   const onDelete = (reminderId) => {
     deleteReminder(reminderId)
-    .then(response => {
+    .then(_ => {
       const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
       setReminders(newReminders);
 
@@ -50,8 +51,8 @@ export const TableReminders = () => {
     });
   };
 
-  const onEdit = () => {
-    alert('edit');
+  const onEdit = (reminderId) => {
+    navigate(`/reminders/edit/${reminderId}`);
   }
 
   return (
