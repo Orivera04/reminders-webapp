@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const SpecificSchedule = ({ handleScheduleChange }) => {
+export const SpecificSchedule = ({ handleScheduleChange, schedules }) => {
   return (
     <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow w-4/5">
       <h2 className="text-2xl font-bold mb-4">Specific Schedule</h2>
@@ -13,6 +13,7 @@ export const SpecificSchedule = ({ handleScheduleChange }) => {
           type="text"
           id="dayOfMonth"
           name="day_of_month"
+          value={ schedules.day_of_month }
           onChange={ handleScheduleChange }
           className="w-full p-2 border rounded-md"
           placeholder="Enter the day of the month that you want to send the reminder"
@@ -25,6 +26,7 @@ export const SpecificSchedule = ({ handleScheduleChange }) => {
           type="time"
           className="w-full p-2 border rounded-md"
           name="hour_of_execution"
+          value={ schedules.hour_of_execution }
           onChange={ handleScheduleChange }
         />
       </div>

@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { getSettings } from '../../../api/settings';
 import { DailySchedules, SpecificSchedule } from '../components';
 import { DAILY_SCHEDULE, DEFAULT_DAILY_SCHEDULES, DEFAULT_SPECIFIC_SCHEDULE } from '../../../helper/constants';
-import { useParams } from 'react-router-dom';
-import { getReminderById } from '../../../api/reminders';
+import { useNavigate, useParams } from 'react-router-dom';
+import { createReminder, getReminderById, updateReminder } from '../../../api/reminders';
 
 export const RemindersFormPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [reminderForm, setReminderForm] = useState({
     id: null,
@@ -70,7 +71,6 @@ export const RemindersFormPage = () => {
     if (!id || reminderForm.availableSettings.length === 0) return;
 
     getReminderById(id).then(response => {
-      debugger
       setReminderForm({
         ...reminderForm,
         id: response.id,
@@ -78,6 +78,7 @@ export const RemindersFormPage = () => {
         message: response.message,
         typeScheduleId: response.typeScheduleId,
         settingId: response.settingId,
+        settingIdSelected: response.settingId,
         schedules: response.schedules
       });
     })
@@ -87,8 +88,45 @@ export const RemindersFormPage = () => {
     });
   }, [ reminderForm.availableSettings ]);
 
-  const handleSubmit = (e) => {
+  const isFormValid = () => {
+    if (reminderForm.chatId === '') {
+      sweetAlert('Error', 'Chat ID is required', 'error');
+      return false;
+    }
+
+    if (reminderForm.message === '') {
+      sweetAlert('Error', 'Message is required', 'error');
+      return false;
+    }
+
+    if (reminderForm.settingIdSelected === '') {
+      sweetAlert('Error', 'Setting is required', 'error');
+      return false;
+    }
+
+    return true;
+  }
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
+
+    if (!isFormValid()) return;
+
+    try {
+      if (reminderForm.id) {
+        const responseMessage = await updateReminder(reminderForm);
+        sweetAlert('Success', responseMessage, 'success');
+
+      }
+      else {
+        const responseMessage = await createReminder(reminderForm);
+        sweetAlert('Success', responseMessage, 'success');
+      }
+
+      navigate('/reminders');
+    } catch(error) {
+      sweetAlert('Error', 'Error creating reminder there was an network error, please try again later.', 'error');
+    }
   };
 
   return (
@@ -154,6 +192,7 @@ export const RemindersFormPage = () => {
                 onChange={ onInputChanged }
               >
 
+                <option value=''>Select a setting</option>
                 {
                   reminderForm.availableSettings.map( (setting, _) => (
                     <option key={ setting.id } value={ setting.id }>{ setting.description }</option>
@@ -165,8 +204,8 @@ export const RemindersFormPage = () => {
 
         {
           (reminderForm.typeScheduleId == DAILY_SCHEDULE)
-            ? <DailySchedules handleScheduleChange={ onScheduleChanged } schedules={ reminderForm.schedules } />
-            : <SpecificSchedule handleScheduleChange={ onScheduleChanged } />
+            ? <DailySchedules handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
+            : <SpecificSchedule handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
         }
 
       </div>

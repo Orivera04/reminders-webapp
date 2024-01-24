@@ -3,6 +3,7 @@ import { deleteReminder, getReminders } from "../../../api/reminders";
 import { Thead } from "../../../components";
 import { TableRowReminder } from "./TableRowReminder";
 import { useNavigate } from "react-router-dom";
+import { deleteAlert } from "../../../helper";
 
 export const TableReminders = () => {
   const navigate = useNavigate();
@@ -19,7 +20,8 @@ export const TableReminders = () => {
   const [reminders, setReminders] = useState(null);
 
   useEffect(() => {
-    const storedReminders = JSON.parse(localStorage.getItem('storedReminders'));
+    const storedReminders = null;
+    // JSON.parse(localStorage.getItem('storedReminders'))
 
     if (storedReminders === null) {
       getReminders().then(response => {
@@ -37,17 +39,19 @@ export const TableReminders = () => {
   }, [  ]);
 
   const onDelete = (reminderId) => {
-    deleteReminder(reminderId)
-    .then(_ => {
-      const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
-      setReminders(newReminders);
+    deleteAlert(async () => {
+      deleteReminder(reminderId)
+      .then(_ => {
+        const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
+        setReminders(newReminders);
 
-      localStorage.setItem('storedReminders', JSON.stringify(newReminders));
-      sweetAlert('Success', 'Reminder deleted successfully', 'success');
-    })
-    .catch(error => {
-      console.log(error);
-      sweetAlert('Error', 'Error deleting reminder there was an network error, please try again later.', 'error');
+        localStorage.setItem('storedReminders', JSON.stringify(newReminders));
+        sweetAlert('Success', 'Reminder deleted successfully', 'success');
+      })
+      .catch(error => {
+        console.log(error);
+        sweetAlert('Error', 'Error deleting reminder there was an network error, please try again later.', 'error');
+      });
     });
   };
 

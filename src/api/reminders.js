@@ -24,26 +24,59 @@ export const getReminderById = async (reminderId) => {
   try {
     const response = await api.get(`/reminders/${reminderId}`);
     const { data } = response;
-    const schedules = JSON.parse(data.schedules).schedules
-    const typeSchedule = data.type_schedule_id
-    const schedulesList = (typeSchedule === DAILY_SCHEDULE)
-                          ? schedules.reduce((schedules, reminder) => {
-                              schedules[WEEK_DAYS[reminder.day - 1]] = reminder.hour_of_execution;
-                              return schedules;
-                            }, {})
-                          : schedules;
 
     return {
       id: data.id,
       chatId: data.chat_id,
       message: data.message,
       typeScheduleId: data.type_schedule_id,
-      schedules: schedulesList,
+      schedules: data.schedules,
       settingId: data.setting_id
     };
   } catch (error) {
     throw new Error('Error fetching reminder: ' + error.message);
   }
+}
+
+export const createReminder = async (reminder) => {
+  try {
+
+    const reminderObject = {
+      chat_id: reminder.chatId,
+      message: reminder.message,
+      type_schedule_id: reminder.typeScheduleId,
+      schedules: reminder.schedules,
+      setting_id: reminder.settingIdSelected
+    };
+
+    const response = await api.post('/reminders', reminderObject);
+    const { data: { message } } = response;
+
+    return message;
+  } catch (error) {
+    throw new Error('Error fetching reminder: ' + error.message);
+  }
+
+}
+
+export const updateReminder = async (reminder) => {
+  try {
+    const reminderObject = {
+      chat_id: reminder.chatId,
+      message: reminder.message,
+      type_schedule_id: reminder.typeScheduleId,
+      schedules: reminder.schedules,
+      setting_id: reminder.settingIdSelected
+    };
+
+    const response = await api.put(`/reminders/${reminder.id}`, reminderObject);
+    const { data: { message } } = response;
+
+    return message;
+  } catch (error) {
+    throw new Error('Error updating reminder: ' + error.message);
+  }
+
 }
 
 export const deleteReminder = async (reminderId) => {
