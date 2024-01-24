@@ -20,8 +20,7 @@ export const TableReminders = () => {
   const [reminders, setReminders] = useState(null);
 
   useEffect(() => {
-    const storedReminders = null;
-    // JSON.parse(localStorage.getItem('storedReminders'))
+    const storedReminders = null; // JSON.parse(localStorage.getItem('storedReminders'));
 
     if (storedReminders === null) {
       getReminders().then(response => {

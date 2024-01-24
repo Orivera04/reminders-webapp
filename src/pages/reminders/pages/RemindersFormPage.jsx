@@ -4,9 +4,12 @@ import { DailySchedules, SpecificSchedule } from '../components';
 import { DAILY_SCHEDULE, DEFAULT_DAILY_SCHEDULES, DEFAULT_SPECIFIC_SCHEDULE } from '../../../helper/constants';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createReminder, getReminderById, updateReminder } from '../../../api/reminders';
+import { useDispatch } from 'react-redux';
+import { onCloseLoader, onOpenLoader } from '../../../../store';
 
 export const RemindersFormPage = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [reminderForm, setReminderForm] = useState({
@@ -48,9 +51,9 @@ export const RemindersFormPage = () => {
 
   useEffect( () => {
     const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
-
     if (storedSettings === null) {
       getSettings().then(response => {
+
         setReminderForm({
           ...reminderForm,
           availableSettings: response,
@@ -70,6 +73,8 @@ export const RemindersFormPage = () => {
   useEffect( () => {
     if (!id || reminderForm.availableSettings.length === 0) return;
 
+    dispatch( onOpenLoader() );
+
     getReminderById(id).then(response => {
       setReminderForm({
         ...reminderForm,
@@ -77,10 +82,11 @@ export const RemindersFormPage = () => {
         chatId: response.chatId,
         message: response.message,
         typeScheduleId: response.typeScheduleId,
-        settingId: response.settingId,
         settingIdSelected: response.settingId,
         schedules: response.schedules
       });
+
+      dispatch( onCloseLoader() );
     })
     .catch(error => {
       console.log(error);
@@ -194,7 +200,7 @@ export const RemindersFormPage = () => {
 
                 <option value=''>Select a setting</option>
                 {
-                  reminderForm.availableSettings.map( (setting, _) => (
+                  reminderForm.availableSettings?.map( (setting, _) => (
                     <option key={ setting.id } value={ setting.id }>{ setting.description }</option>
                   ))
                 }
