@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { Thead } from "../../../components/"
-import { TableRow } from "./TableRow"
-import { api } from '../../../helper/api';
-import { deleteAlert } from '../../../helper';
+import { Thead } from "../../../components";
+import { deleteAlert } from "../../../helper";
+import { TableRow } from "./index";
+import { api, getSettings } from '../../../api';
 
 export const TableSettings = () => {
   const headers = [
@@ -14,10 +14,10 @@ export const TableSettings = () => {
     'Actions'
   ];
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    api.get('/settings')
+    getSettings()
       .then(res => {
         setData(res.data);
       })
@@ -26,16 +26,16 @@ export const TableSettings = () => {
       })
   }, [])
 
-  const handleDeleteSetting = (id) => {
+  const onDeleteSetting = (id) => {
     deleteAlert(async () => {
       try {
-        const result = await api.delete(`/settings/${id}`);
-        if(result.status === 200) {
+        const response = await api.delete(`/settings/${id}`);
+        if(response.status === 200) {
           let newData = [...data];
           newData = newData.filter((element) => element.id !== id);
           setData(newData);
         } else {
-          console.error('Error:', result.status);
+          console.error('Error:', response.status);
         }
       } catch (error) {
         console.error('Error:', error.message);
@@ -44,19 +44,17 @@ export const TableSettings = () => {
   }
 
   return (
-    <table className="min-w-full leading-normal">
-      <Thead headers={ headers } />
-      <tbody>
-        {
-          data && data.map((element, _) => (
-            <TableRow id={element.id}
-                      apiTokenBot={ element.token_bot_api }
-                      markDownId={ element.formatting_style_id }
-                      description={ element.description }
-                      handleDelete={ handleDeleteSetting }/>
-          ))
-        }
-      </tbody>
-    </table>
+    <div>
+      <table className="min-w-full leading-normal">
+        <Thead headers={ headers } />
+        <tbody>
+          {
+            data.map((element) => (
+              <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } />
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
   )
 }

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export const SettingForm = ({ type, onCreate }) => {
+export const SettingForm = ({ type, onSave, setting }) => {
   const formType = {
     'create': {
       'title': 'Create Setting',
@@ -12,11 +12,19 @@ export const SettingForm = ({ type, onCreate }) => {
     }
   }
 
-  const [formData, setFormData] = useState({
-    token_bot_api: '',
-    formatting_style_id: '',
-    description: ''
-  });
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if(setting) {
+      setFormData(setting)
+    } else {
+      setFormData({
+        token_bot_api: '',
+        formatting_style_id: '',
+        description: ''
+      })
+    }
+  }, [setting])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +36,10 @@ export const SettingForm = ({ type, onCreate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate(formData);
+    if (formData.token_bot_api.trim() === '') return;
+    if (formData.description.trim() === '') return;
+
+    onSave(formData);
   };
 
   return (

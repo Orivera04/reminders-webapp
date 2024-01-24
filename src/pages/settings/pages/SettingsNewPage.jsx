@@ -19,6 +19,6 @@ export const SettingsNewPage = () => {
   };
 
   return (
-    <SettingForm type={'create'} onCreate={ onCreateSetting } />
+    <SettingForm type={'create'} onSave={ onCreateSetting } />
   )
 }

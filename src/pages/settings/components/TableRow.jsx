@@ -4,29 +4,27 @@ import { ActionSection } from "../../../components/index"
 const MARKDOWN_STYLE = 1;
 const HTML_STYLE = 2;
 
-export const TableRow = ({ id, apiTokenBot, markDownId, description, handleDelete, handleUpdate }) => {
+export const TableRow = ({ element, onDelete }) => {
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        { id }
+        { element.id }
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        { apiTokenBot }
+        { element.token_bot_api }
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        { markDownId === MARKDOWN_STYLE ? <MarkDownBadge /> : <HtmlBadge /> }
+        { element.formatting_style_id === MARKDOWN_STYLE ? <MarkDownBadge /> : <HtmlBadge /> }
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        { description }
+        { element.description }
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <ActionSection id={ id }
-                       handleDelete={ handleDelete }
-                       handleUpdate={ handleUpdate } />
+        <ActionSection id={ element.id } onDelete={ onDelete } />
       </td>
     </tr>
   )
