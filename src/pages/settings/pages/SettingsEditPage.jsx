@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { SettingForm } from '../components';
-import { api } from '../../../api';
 import { useState, useEffect } from 'react';
-import { SuccessAlert, ErrorAlert } from '../../../helper';
+import { SuccessAlert, ErrorAlert, api } from '../../../helper';
 
 export const SettingsEditPage = () => {
 

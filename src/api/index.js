@@ -1,2 +1,2 @@
-export * from './reminderApi';
-export * from './setting';
+export * from './reminders';
+export * from './settings';

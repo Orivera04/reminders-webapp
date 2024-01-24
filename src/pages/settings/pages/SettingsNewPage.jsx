@@ -1,6 +1,5 @@
 import { SettingForm } from '../components';
-import { api } from '../../../api';
-import { SuccessAlert, ErrorAlert } from '../../../helper'
+import { SuccessAlert, ErrorAlert, api } from '../../../helper'
 
 export const SettingsNewPage = () => {
   const onCreateSetting = async (data) => {

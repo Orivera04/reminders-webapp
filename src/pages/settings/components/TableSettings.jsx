@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Thead } from "../../../components";
 import { deleteAlert } from "../../../helper";
 import { TableRow } from "./index";
-import { api, getSettings } from '../../../api';
+import { api } from '../../../helper';
 
 export const TableSettings = () => {
   const headers = [
@@ -17,7 +17,7 @@ export const TableSettings = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getSettings()
+    api.get('/settings')
       .then(res => {
         setData(res.data);
       })
@@ -49,7 +49,7 @@ export const TableSettings = () => {
         <Thead headers={ headers } />
         <tbody>
           {
-            data.map((element) => (
+            data && data.map((element) => (
               <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } />
             ))
           }
