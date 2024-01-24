@@ -17,3 +17,25 @@ export const deleteAlert = (handleDelete) => {
     }
   });
 }
+
+export const SuccessAlert = (message) => {
+  swal({
+    title: message,
+    text: ' ',
+    icon: "success",
+    buttons: false
+  })
+
+  setTimeout(function() {
+    window.location.pathname = '/settings';
+  }, 2000);
+}
+
+export const ErrorAlert = (error) => {
+  swal({
+    title: error,
+    text: ' ',
+    icon: "error",
+    buttons: false
+  })
+}

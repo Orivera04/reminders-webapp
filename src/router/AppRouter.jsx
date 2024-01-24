@@ -6,7 +6,6 @@ import { Loader } from "../components/Loader"
 
 
 export const AppRouter = () => {
-
   const { isLoading } = useSelector(state => state.ui);
 
   return (
@@ -16,7 +15,7 @@ export const AppRouter = () => {
       <div style={{ display: isLoading ? 'none' : 'block' }}>
         <Routes>
           <Route path="/reminders/*" element={<RemindersRoutes />} />
-          <Route path="/settings" element={ <SettingsRoutes /> } />
+          <Route path="/settings/*" element={ <SettingsRoutes /> } />
 
           <Route path="*" element={<Navigate to="/reminders" replace={ true } />} />
         </Routes>
