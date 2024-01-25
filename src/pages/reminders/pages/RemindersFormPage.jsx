@@ -7,8 +7,6 @@ import { createReminder, getReminderById, updateReminder } from '../../../api/re
 import { useDispatch } from 'react-redux';
 import { onCloseLoader, onOpenLoader } from '../../../../store';
 import { clearRemindersStorage } from '../../../helper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { SendReminder } from '../components/SendReminder';
 
 export const RemindersFormPage = () => {
