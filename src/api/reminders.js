@@ -1,5 +1,4 @@
 import { api } from "../helper/api";
-import { DAILY_SCHEDULE, WEEK_DAYS } from "../helper/constants";
 
 export const getReminders = async () => {
   try {
@@ -56,7 +55,6 @@ export const createReminder = async (reminder) => {
   } catch (error) {
     throw new Error('Error fetching reminder: ' + error.message);
   }
-
 }
 
 export const updateReminder = async (reminder) => {
@@ -89,4 +87,20 @@ export const deleteReminder = async (reminderId) => {
     throw new Error('Error deleting reminder: ' + error.message);
   }
 
+}
+
+export const sendReminder = async (reminderId) => {
+  try {
+
+    const reminderObject = {
+      reminder_id: reminderId
+    };
+
+    const response = await api.post('/telegram_triggers', reminderObject);
+    const { data: { message } } = response;
+
+    return message;
+  } catch (error) {
+    throw new Error('Error fetching reminder: ' + error.message);
+  }
 }

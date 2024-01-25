@@ -4,9 +4,13 @@ import { Thead } from "../../../components";
 import { TableRowReminder } from "./TableRowReminder";
 import { useNavigate } from "react-router-dom";
 import { deleteAlert } from "../../../helper";
+import { useDispatch } from "react-redux";
+import { onCloseLoader, onOpenLoader } from "../../../../store";
 
 export const TableReminders = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const headers = [
     'ID',
@@ -20,12 +24,15 @@ export const TableReminders = () => {
   const [reminders, setReminders] = useState(null);
 
   useEffect(() => {
-    const storedReminders = null; // JSON.parse(localStorage.getItem('storedReminders'));
+    const storedReminders = JSON.parse(localStorage.getItem('storedReminders'));
 
     if (storedReminders === null) {
+      dispatch( onOpenLoader() );
+
       getReminders().then(response => {
         setReminders(response);
         localStorage.setItem('storedReminders', JSON.stringify(response));
+        dispatch( onCloseLoader() );
       })
       .catch(error => {
         console.log(error);

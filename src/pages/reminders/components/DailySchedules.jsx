@@ -7,7 +7,7 @@ export const DailySchedules = ({ handleScheduleChange, schedules }) => {
 
       { Object.entries(schedules).map(([day, executionTime]) => (
         <div key={ day } className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">{ day }</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2 capitalize">{ day }</label>
           <input
             type="time"
             name={ day }

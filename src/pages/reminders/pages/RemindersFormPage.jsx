@@ -6,6 +6,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { createReminder, getReminderById, updateReminder } from '../../../api/reminders';
 import { useDispatch } from 'react-redux';
 import { onCloseLoader, onOpenLoader } from '../../../../store';
+import { clearRemindersStorage } from '../../../helper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
+import { SendReminder } from '../components/SendReminder';
 
 export const RemindersFormPage = () => {
   const { id } = useParams();
@@ -118,6 +122,8 @@ export const RemindersFormPage = () => {
 
     if (!isFormValid()) return;
 
+    dispatch( onOpenLoader() );
+
     try {
       if (reminderForm.id) {
         const responseMessage = await updateReminder(reminderForm);
@@ -129,6 +135,8 @@ export const RemindersFormPage = () => {
         sweetAlert('Success', responseMessage, 'success');
       }
 
+      dispatch( onCloseLoader() );
+      clearRemindersStorage();
       navigate('/reminders');
     } catch(error) {
       sweetAlert('Error', 'Error creating reminder there was an network error, please try again later.', 'error');
@@ -136,89 +144,95 @@ export const RemindersFormPage = () => {
   };
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <div className='flex justify-center m-5'>
-        <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow w-4/5 mr-10">
-            <h2 className="text-2xl font-bold mb-4">Create new reminder</h2>
-            <div className="mb-4">
-              <label htmlFor="chatId" className="block text-gray-700 text-sm font-bold mb-2">
-                Chat ID
-              </label>
-              <input
-                type="text"
-                id="chatId"
-                name="chatId"
-                className="w-full p-2 border rounded-md"
-                placeholder="Enter your group chat ID"
-                value = { reminderForm.chatId }
-                onChange={ onInputChanged }
-              />
-            </div>
+    <>
+      {
+        !!id && <SendReminder reminderId= { id } />
+      }
 
-            <div className="mb-4">
-              <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                className="w-full p-2 border rounded-md"
-                rows="4"
-                placeholder="Enter your message..."
-                value = { reminderForm.message }
-                onChange={ onInputChanged }
-              />
-            </div>
+      <form onSubmit={ handleSubmit }>
+        <div className='flex justify-center m-5'>
+          <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow w-4/5 mr-10">
+              <h2 className="text-2xl font-bold mb-4">Create new reminder</h2>
+              <div className="mb-4">
+                <label htmlFor="chatId" className="block text-gray-700 text-sm font-bold mb-2">
+                  Chat ID
+                </label>
+                <input
+                  type="text"
+                  id="chatId"
+                  name="chatId"
+                  className="w-full p-2 border rounded-md"
+                  placeholder="Enter your group chat ID"
+                  value = { reminderForm.chatId }
+                  onChange={ onInputChanged }
+                />
+              </div>
 
-            <div className="mb-4">
-              <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
-                Type Schedule
-              </label>
-              <select
-                id="typeScheduleId"
-                name="typeScheduleId"
-                className="w-full p-2 border rounded-md"
-                value = { reminderForm.typeScheduleId }
-                onChange={ onTypeScheduleChanged }
-              >
-                <option value="1">Daily</option>
-                <option value="2">Specific</option>
-              </select>
-            </div>
+              <div className="mb-4">
+                <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="w-full p-2 border rounded-md"
+                  rows="4"
+                  placeholder="Enter your message..."
+                  value = { reminderForm.message }
+                  onChange={ onInputChanged }
+                />
+              </div>
 
-            <div className="mb-4">
-              <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
-                Setting
-              </label>
-              <select
-                id="settingIdSelected"
-                name="settingIdSelected"
-                className="w-full p-2 border rounded-md"
-                value = { reminderForm.settingIdSelected }
-                onChange={ onInputChanged }
-              >
+              <div className="mb-4">
+                <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
+                  Type Schedule
+                </label>
+                <select
+                  id="typeScheduleId"
+                  name="typeScheduleId"
+                  className="w-full p-2 border rounded-md"
+                  value = { reminderForm.typeScheduleId }
+                  onChange={ onTypeScheduleChanged }
+                >
+                  <option value="1">Daily</option>
+                  <option value="2">Specific</option>
+                </select>
+              </div>
 
-                <option value=''>Select a setting</option>
-                {
-                  reminderForm.availableSettings?.map( (setting, _) => (
-                    <option key={ setting.id } value={ setting.id }>{ setting.description }</option>
-                  ))
-                }
-              </select>
-            </div>
+              <div className="mb-4">
+                <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
+                  Setting
+                </label>
+                <select
+                  id="settingIdSelected"
+                  name="settingIdSelected"
+                  className="w-full p-2 border rounded-md"
+                  value = { reminderForm.settingIdSelected }
+                  onChange={ onInputChanged }
+                >
+
+                  <option value=''>Select a setting</option>
+                  {
+                    reminderForm.availableSettings?.map( (setting, _) => (
+                      <option key={ setting.id } value={ setting.id }>{ setting.description }</option>
+                    ))
+                  }
+                </select>
+              </div>
+          </div>
+
+          {
+            (reminderForm.typeScheduleId == DAILY_SCHEDULE)
+              ? <DailySchedules handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
+              : <SpecificSchedule handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
+          }
+
         </div>
 
-        {
-          (reminderForm.typeScheduleId == DAILY_SCHEDULE)
-            ? <DailySchedules handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
-            : <SpecificSchedule handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
-        }
-
-      </div>
-
-      <div className='flex justify-center'>
-        <button type='submit' className='flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-20 mb-1'>Submit</button>
-      </div>
-    </form>
+        <div className='flex justify-center'>
+          <button type='submit' className='flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-20 mb-1'>Submit</button>
+        </div>
+      </form>
+    </>
   );
 }
