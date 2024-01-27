@@ -1,12 +1,12 @@
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export const UpdateButton = ({ id }) => {
+export const UpdateButton = ({ id, onUpdate }) => {
   return (
-    <a className="p-3 rounded bg-blue-500 hover:bg-blue-600 text-white
+    <button className="p-3 rounded bg-blue-500 hover:bg-blue-600 text-white
                 hover:text-gray-100 transition duration-300 ease-in-out"
-       href={`/settings/${id}/edit`}>
+            onClick={ () => onUpdate(id) }>
       <FontAwesomeIcon icon={faPenToSquare} />
-    </a>
+    </button>
   )
 }

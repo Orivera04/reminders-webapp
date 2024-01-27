@@ -15,27 +15,40 @@ export const deleteAlert = (handleDelete) => {
         icon: "success",
       });
     }
+  })
+}
+
+export const areYouSureAlert = (message, handleDelete) => {
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover it!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (!willDelete) return;
+    handleDelete();
+    swal(message, { icon: "success" });
   });
 }
 
-export const SuccessAlert = (message) => {
+export const successAlert = (message, redirecTo) => {
   swal({
     title: message,
     text: ' ',
-    icon: "success",
-    buttons: false
-  })
+    icon: "success"
+  }).then(() => {
+    if(!redirecTo) return;
 
-  setTimeout(function() {
-    window.location.pathname = '/settings';
-  }, 2000);
+    window.location.pathname = redirecTo;
+  });
 }
 
-export const ErrorAlert = (error) => {
+export const errorAlert = (error, text) => {
   swal({
     title: error,
-    text: ' ',
-    icon: "error",
-    buttons: false
+    text: text || ' ',
+    icon: "error"
   })
 }

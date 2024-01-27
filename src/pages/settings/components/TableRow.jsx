@@ -4,7 +4,7 @@ import { ActionSection } from "../../../components/index"
 const MARKDOWN_STYLE = 1;
 const HTML_STYLE = 2;
 
-export const TableRow = ({ element, onDelete }) => {
+export const TableRow = ({ element, onDelete, onUpdate }) => {
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -24,7 +24,7 @@ export const TableRow = ({ element, onDelete }) => {
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <ActionSection id={ element.id } onDelete={ onDelete } />
+        <ActionSection id={ element.id } onDelete={ onDelete } onUpdate={ onUpdate } />
       </td>
     </tr>
   )

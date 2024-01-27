@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { Thead } from "../../../components";
 import { areYouSureAlert } from "../../../helper";
@@ -18,6 +19,7 @@ export const TableSettings = () => {
 
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
@@ -44,6 +46,10 @@ export const TableSettings = () => {
     })
   }
 
+  const onUpdateSetting = (id) => {
+    navigate(`/settings/${id}/edit`);
+  }
+
   return (
     <div>
       <table className="min-w-full leading-normal">
@@ -51,7 +57,7 @@ export const TableSettings = () => {
         <tbody>
           {
             data && data.map((element) => (
-              <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } />
+              <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } onUpdate={ onUpdateSetting } />
             ))
           }
         </tbody>

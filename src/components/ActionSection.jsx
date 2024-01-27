@@ -1,9 +1,9 @@
 import { UpdateButton, DeleteButton } from "./index"
 
-export const ActionSection = ({ id, onDelete }) => {
+export const ActionSection = ({ id, onDelete, onUpdate }) => {
   return (
     <div>
-      <UpdateButton id={ id } />
+      <UpdateButton id={ id } onUpdate={ onUpdate }/>
       <DeleteButton id={ id } onDelete={ onDelete } />
     </div>
   )
