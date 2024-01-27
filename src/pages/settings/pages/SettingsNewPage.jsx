@@ -1,20 +1,16 @@
 import { SettingForm } from '../components';
-import { SuccessAlert, ErrorAlert, api } from '../../../helper'
+import { successAlert, errorAlert } from '../../../helper'
+import { createSetting } from '../../../api';
 
 export const SettingsNewPage = () => {
-  const onCreateSetting = async (data) => {
-    try {
-      const response = await api.post('/settings', data);
-      if(response.status === 200) {
-        SuccessAlert(response.message);
-      } else {
-        ErrorAlert(response.error);
-        console.error('Error:', response.error);
-      }
-    } catch (error) {
-      ErrorAlert(error.message);
-      console.error('Error al crear un nuevo registro:', error);
-    }
+  const onCreateSetting = async (settingData) => {
+    createSetting(settingData)
+      .then((data) => {
+        const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
+        localStorage.setItem('storedSettings', JSON.stringify([...storedSettings, data.record]));
+        successAlert(data.message, '/settings')
+      })
+      .catch((error) => errorAlert(error.message));
   };
 
   return (

@@ -27,3 +27,9 @@ export const WEEK_DAYS = [
   'saturday',
   'sunday'
 ];
+
+export const SETTING_DEFAULT_FIELDS = {
+  token_bot_api: '',
+  formatting_style_id: '',
+  description: ''
+}

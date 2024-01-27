@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helper';
 
 export const SettingForm = ({ type, onSave, setting }) => {
   const formType = {
@@ -10,34 +11,35 @@ export const SettingForm = ({ type, onSave, setting }) => {
       'title': 'Update Setting',
       'button': 'Update'
     }
-  }
+  };
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(SETTING_DEFAULT_FIELDS);
 
   useEffect(() => {
-    if(setting) {
-      setFormData(setting)
-    } else {
-      setFormData({
-        token_bot_api: '',
-        formatting_style_id: '',
-        description: ''
-      })
-    }
-  }, [setting])
+    if(setting) return setFormData(setting);
+
+    setFormData(SETTING_DEFAULT_FIELDS);
+  }, [setting]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
-    ...formData,
-    [name]: value,
+      ...formData,
+      [name]: value,
     });
   };
 
+  const formDataIsValid = () => {
+    return (
+      !(formData.token_bot_api.trim() === '' ||
+        formData.description.trim() === '' ||
+        formData.formatting_style_id === '')
+    )
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.token_bot_api.trim() === '') return;
-    if (formData.description.trim() === '') return;
+    if(!formDataIsValid()) return errorAlert('Error', 'All fields are required!');
 
     onSave(formData);
   };
@@ -76,6 +78,7 @@ export const SettingForm = ({ type, onSave, setting }) => {
                                   focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                         value={ formData.formatting_style_id }
                         onChange={ handleChange }>
+                  <option> Select an option </option>
                   <option value={ 1 }> Markdown </option>
                   <option value={ 2 }> HTML </option>
                 </select>

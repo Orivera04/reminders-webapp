@@ -1,44 +1,34 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { SettingForm } from '../components';
-import { useState, useEffect } from 'react';
-import { SuccessAlert, ErrorAlert, api } from '../../../helper';
+import { successAlert, errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helper';
+import { getSetting, updateSetting } from '../../../api';
 
 export const SettingsEditPage = () => {
 
   const { id } = useParams();
-  const [setting, setSetting] = useState({});
+  const [setting, setSetting] = useState(SETTING_DEFAULT_FIELDS);
 
   useEffect(() => {
-    const getSetting = async () => {
-      try {
-        const response = await api.get(`/settings/${id}`);
+    const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
+    const setting = storedSettings?.find((element) => element.id === parseInt(id));
 
-        if(response.status === 200) {
-          setSetting(response.data)
-        } else {
-          console.error('Error:', response.error);
-        }
-      } catch(error) {
-        console.error('Error al crear un nuevo registro:', error);
-      }
-    }
-    getSetting();
+    if(setting) return setSetting(setting);
+
+    getSetting(id).then((data) => {
+      setSetting(data);
+    });
   }, [id])
 
-  const onUpdateSetting = async (data) => {
-    try {
-      const response = await api.put(`/settings/${id}`, data);
-
-      if(response.status === 200) {
-        SuccessAlert(response.message);
-      } else {
-        ErrorAlert(response.error);
-        console.error('Error:', response.error);
-      }
-    } catch (error) {
-      ErrorAlert(error.message);
-      console.error('Error al crear un nuevo registro:', error);
-    }
+  const onUpdateSetting = (settingData) => {
+    updateSetting(id, settingData)
+      .then((data) => {
+        const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
+        const newData = storedSettings.filter((element) => element.id !== parseInt(id));
+        localStorage.setItem('storedSettings', JSON.stringify([...newData, data.record]));
+        successAlert(data.message, '/settings')
+      })
+      .catch((error) => errorAlert(error.message));
   }
 
   return (

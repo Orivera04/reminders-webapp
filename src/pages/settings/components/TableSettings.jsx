@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
 
 import { Thead } from "../../../components";
-import { deleteAlert } from "../../../helper";
+import { areYouSureAlert } from "../../../helper";
 import { TableRow } from "./index";
-import { api } from '../../../helper';
+import { onCloseLoader, onOpenLoader } from "../../../../store";
+import { getAllSettings, deleteSetting } from '../../../api';
 
 export const TableSettings = () => {
   const headers = [
@@ -15,31 +17,30 @@ export const TableSettings = () => {
   ];
 
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    api.get('/settings')
-      .then(res => {
-        setData(res.data);
-      })
-      .catch(error => {
-        console.error('error al obtener datos', error);
-      })
-  }, [])
+    const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
+
+    if(storedSettings) return setData(storedSettings);
+
+    dispatch(onOpenLoader());
+
+    getAllSettings().then((data) => {
+      setData(data);
+      localStorage.setItem('storedSettings', JSON.stringify(data));
+      dispatch(onCloseLoader());
+    });
+  }, []);
 
   const onDeleteSetting = (id) => {
-    deleteAlert(async () => {
-      try {
-        const response = await api.delete(`/settings/${id}`);
-        if(response.status === 200) {
-          let newData = [...data];
-          newData = newData.filter((element) => element.id !== id);
-          setData(newData);
-        } else {
-          console.error('Error:', response.status);
-        }
-      } catch (error) {
-        console.error('Error:', error.message);
-      }
+    deleteSetting(id).then((message) => {
+      areYouSureAlert(message, () => {
+        let newData = [...data];
+        newData = newData.filter((element) => element.id !== id);
+        localStorage.setItem('storedSettings', JSON.stringify(newData));
+        setData(newData);
+      })
     })
   }
 

@@ -22,7 +22,6 @@ export const SettingsPage = () => {
           <TableSettings />
         </div>
       </div>
-
     </>
   )
 }
