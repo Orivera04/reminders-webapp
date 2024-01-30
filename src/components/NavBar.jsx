@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Separator } from './index';
+import { Separator, TranslationSwitcher } from './index';
 
 function NavBar() {
   return (
@@ -37,6 +37,8 @@ function NavBar() {
           </NavLink>
         </li>
       </ul>
+
+      <TranslationSwitcher />
     </nav>
   );
 }
