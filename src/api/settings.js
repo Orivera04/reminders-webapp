@@ -10,19 +10,19 @@ export const getAllSettings = async () => {
   }
 }
 
-export const deleteSetting = async (id) => {
+export const getSetting = async (id) => {
   try {
-    const { data } = await api.delete(`/settings/${id}`);
+    const { data } = await api.get(`/settings/${id}`);
 
-    return data.message
+    return data;
   } catch(error) {
     throw new Error('Error: ' + error.message);
   }
 }
 
-export const getSetting = async (id) => {
+export const createSetting = async (settingData) => {
   try {
-    const { data } = await api.get(`/settings/${id}`);
+    const { data } = await api.post('/settings', settingData);
 
     return data;
   } catch(error) {
@@ -40,11 +40,11 @@ export const updateSetting = async (id, settingData) => {
   }
 }
 
-export const createSetting = async (settingData) => {
+export const deleteSetting = async (id) => {
   try {
-    const { data } = await api.post('/settings', settingData);
+    const { data } = await api.delete(`/settings/${id}`);
 
-    return data;
+    return data.message
   } catch(error) {
     throw new Error('Error: ' + error.message);
   }

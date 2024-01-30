@@ -33,16 +33,14 @@ export const areYouSureAlert = (message, handleDelete) => {
   });
 }
 
-export const successAlert = (message, redirecTo) => {
-  swal({
-    title: message,
-    text: ' ',
-    icon: "success"
-  }).then(() => {
-    if(!redirecTo) return;
-
-    window.location.pathname = redirecTo;
-  });
+export const successAlert = (message) => {
+  return (
+    swal({
+      title: message,
+      text: ' ',
+      icon: "success"
+    })
+  );
 }
 
 export const errorAlert = (error, text) => {

@@ -22,15 +22,10 @@ export const TableSettings = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
-
-    if(storedSettings) return setData(storedSettings);
-
     dispatch(onOpenLoader());
 
     getAllSettings().then((data) => {
       setData(data);
-      localStorage.setItem('storedSettings', JSON.stringify(data));
       dispatch(onCloseLoader());
     });
   }, []);
@@ -40,7 +35,6 @@ export const TableSettings = () => {
       areYouSureAlert(message, () => {
         let newData = [...data];
         newData = newData.filter((element) => element.id !== id);
-        localStorage.setItem('storedSettings', JSON.stringify(newData));
         setData(newData);
       })
     })
@@ -56,7 +50,7 @@ export const TableSettings = () => {
         <Thead headers={ headers } />
         <tbody>
           {
-            data && data.map((element) => (
+            data.map((element) => (
               <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } onUpdate={ onUpdateSetting } />
             ))
           }
