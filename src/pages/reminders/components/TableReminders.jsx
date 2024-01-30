@@ -3,7 +3,7 @@ import { deleteReminder, getReminders } from "../../../api/reminders";
 import { Thead } from "../../../components";
 import { TableRowReminder } from "./TableRowReminder";
 import { useNavigate } from "react-router-dom";
-import { deleteAlert } from "../../../helper";
+import { areYouSureAlert, successAlert } from "../../../helper";
 import { useDispatch } from "react-redux";
 import { onCloseLoader, onOpenLoader } from "../../../../store";
 
@@ -38,20 +38,14 @@ export const TableReminders = () => {
   }, [  ]);
 
   const onDelete = (reminderId) => {
-    deleteAlert(async () => {
-      deleteReminder(reminderId)
-      .then(_ => {
+    areYouSureAlert(() => {
+      deleteReminder(reminderId).then((message) => {
         const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
         setReminders(newReminders);
 
-        localStorage.setItem('storedReminders', JSON.stringify(newReminders));
-        sweetAlert('Success', 'Reminder deleted successfully', 'success');
-      })
-      .catch(error => {
-        console.log(error);
-        sweetAlert('Error', 'Error deleting reminder there was an network error, please try again later.', 'error');
+        successAlert(message);
       });
-    });
+    })
   };
 
   const onEdit = (reminderId) => {
