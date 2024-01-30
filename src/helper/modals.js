@@ -18,7 +18,7 @@ export const deleteAlert = (handleDelete) => {
   })
 }
 
-export const areYouSureAlert = (message, handleDelete) => {
+export const areYouSureAlert = (handleDelete) => {
   swal({
     title: "Are you sure?",
     text: "Once deleted, you will not be able to recover it!",
@@ -29,7 +29,6 @@ export const areYouSureAlert = (message, handleDelete) => {
   .then((willDelete) => {
     if (!willDelete) return;
     handleDelete();
-    swal(message, { icon: "success" });
   });
 }
 

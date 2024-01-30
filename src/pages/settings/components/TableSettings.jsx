@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Thead } from "../../../components";
-import { areYouSureAlert } from "../../../helper";
+import { areYouSureAlert, successAlert } from "../../../helper";
 import { TableRow } from "./index";
 import { onCloseLoader, onOpenLoader } from "../../../../store";
 import { getAllSettings, deleteSetting } from '../../../api';
@@ -31,11 +31,12 @@ export const TableSettings = () => {
   }, []);
 
   const onDeleteSetting = (id) => {
-    deleteSetting(id).then((message) => {
-      areYouSureAlert(message, () => {
+    areYouSureAlert( () => {
+      deleteSetting(id).then((message) => {
         let newData = [...data];
         newData = newData.filter((element) => element.id !== id);
         setData(newData);
+        successAlert(message);
       })
     })
   }
