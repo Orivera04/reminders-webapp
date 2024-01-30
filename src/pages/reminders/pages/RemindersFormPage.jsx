@@ -226,7 +226,12 @@ export const RemindersFormPage = () => {
         </div>
 
         <div className='flex justify-center'>
-          <button type='submit' className='flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-20 mb-1'>Submit</button>
+          <button type="submit" className="block w-80 rounded-md bg-indigo-600 px-3.5 py-2.5 text-center
+                                            text-sm font-semibold text-white shadow-sm hover:bg-indigo-500
+                                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                            focus-visible:outline-indigo-600 mb-1">
+            Submit
+          </button>
         </div>
       </form>
     </>
