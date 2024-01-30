@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+
+import { onCloseLoader, onOpenLoader } from '../../../../store';
 import { SettingForm } from '../components';
 import { successAlert, errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helper';
 import { getSetting, updateSetting } from '../../../api';
@@ -8,11 +11,16 @@ export const SettingsEditPage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [setting, setSetting] = useState(SETTING_DEFAULT_FIELDS);
 
   useEffect(() => {
+    dispatch(onOpenLoader());
+
     getSetting(id).then((data) => {
       setSetting(data);
+
+      dispatch(onCloseLoader());
     });
   }, [id])
 
