@@ -80,9 +80,9 @@ export const updateReminder = async (reminder) => {
 export const deleteReminder = async (reminderId) => {
   try {
     const response = await api.delete(`/reminders/${reminderId}`);
-    const { message } = response;
+    const { data } = response;
 
-    return message;
+    return data.message;
   } catch (error) {
     throw new Error('Error deleting reminder: ' + error.message);
   }
