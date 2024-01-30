@@ -24,24 +24,17 @@ export const TableReminders = () => {
   const [reminders, setReminders] = useState(null);
 
   useEffect(() => {
-    const storedReminders = JSON.parse(localStorage.getItem('storedReminders'));
+    dispatch( onOpenLoader() );
 
-    if (storedReminders === null) {
-      dispatch( onOpenLoader() );
-
-      getReminders().then(response => {
-        setReminders(response);
-        localStorage.setItem('storedReminders', JSON.stringify(response));
-        dispatch( onCloseLoader() );
-      })
-      .catch(error => {
-        console.log(error);
-        sweetAlert('Error', 'Error getting reminders there was an network error, please try again later.', 'error');
-      });
-    }
-    else {
-      setReminders(storedReminders);
-    }
+    getReminders().then(response => {
+      setReminders(response);
+      localStorage.setItem('storedReminders', JSON.stringify(response));
+      dispatch( onCloseLoader() );
+    })
+    .catch(error => {
+      console.log(error);
+      sweetAlert('Error', 'Error getting reminders there was an network error, please try again later.', 'error');
+    });
   }, [  ]);
 
   const onDelete = (reminderId) => {

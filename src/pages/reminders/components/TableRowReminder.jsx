@@ -25,8 +25,8 @@ export const TableRowReminder = ({ id, chatID, message, reminderType, BotName, h
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <ActionSection id={ id }
-          handleDelete={ handleDelete }
-          handleUpdate={ handleUpdate } />
+          onDelete={ handleDelete }
+          onUpdate={ handleUpdate } />
       </td>
     </tr>
   )

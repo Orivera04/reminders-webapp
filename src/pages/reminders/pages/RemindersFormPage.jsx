@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { createReminder, getReminderById, updateReminder } from '../../../api/reminders';
 import { useDispatch } from 'react-redux';
 import { onCloseLoader, onOpenLoader } from '../../../../store';
-import { clearRemindersStorage } from '../../../helper';
 import { SendReminder } from '../components/SendReminder';
 
 export const RemindersFormPage = () => {
@@ -134,7 +133,6 @@ export const RemindersFormPage = () => {
       }
 
       dispatch( onCloseLoader() );
-      clearRemindersStorage();
       navigate('/reminders');
     } catch(error) {
       sweetAlert('Error', 'Error creating reminder there was an network error, please try again later.', 'error');

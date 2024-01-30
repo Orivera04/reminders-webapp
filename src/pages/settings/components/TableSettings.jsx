@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { Thead } from "../../../components/"
-import { TableRow } from "./TableRow"
-import { api } from '../../../helper/api';
-import { deleteAlert } from '../../../helper';
+import { Thead } from "../../../components";
+import { areYouSureAlert } from "../../../helper";
+import { TableRow } from "./index";
+import { onCloseLoader, onOpenLoader } from "../../../../store";
+import { getAllSettings, deleteSetting } from '../../../api';
 
 export const TableSettings = () => {
   const headers = [
@@ -14,49 +17,45 @@ export const TableSettings = () => {
     'Actions'
   ];
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    api.get('/settings')
-      .then(res => {
-        setData(res.data);
-      })
-      .catch(error => {
-        console.error('error al obtener datos', error);
-      })
-  }, [])
+    dispatch(onOpenLoader());
 
-  const handleDeleteSetting = (id) => {
-    deleteAlert(async () => {
-      try {
-        const result = await api.delete(`/settings/${id}`);
-        if(result.status === 200) {
-          let newData = [...data];
-          newData = newData.filter((element) => element.id !== id);
-          setData(newData);
-        } else {
-          console.error('Error:', result.status);
-        }
-      } catch (error) {
-        console.error('Error:', error.message);
-      }
+    getAllSettings().then((data) => {
+      setData(data);
+      dispatch(onCloseLoader());
+    });
+  }, []);
+
+  const onDeleteSetting = (id) => {
+    deleteSetting(id).then((message) => {
+      areYouSureAlert(message, () => {
+        let newData = [...data];
+        newData = newData.filter((element) => element.id !== id);
+        setData(newData);
+      })
     })
   }
 
+  const onUpdateSetting = (id) => {
+    navigate(`/settings/${id}/edit`);
+  }
+
   return (
-    <table className="min-w-full leading-normal">
-      <Thead headers={ headers } />
-      <tbody>
-        {
-          data && data.map((element, _) => (
-            <TableRow id={element.id}
-                      apiTokenBot={ element.token_bot_api }
-                      markDownId={ element.formatting_style_id }
-                      description={ element.description }
-                      handleDelete={ handleDeleteSetting }/>
-          ))
-        }
-      </tbody>
-    </table>
+    <div>
+      <table className="min-w-full leading-normal">
+        <Thead headers={ headers } />
+        <tbody>
+          {
+            data.map((element) => (
+              <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } onUpdate={ onUpdateSetting } />
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
   )
 }
