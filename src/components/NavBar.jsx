@@ -1,7 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { Separator } from './index';
+import { Separator, TranslationSwitcher } from './index';
+import { useTranslation } from 'react-i18next';
 
 function NavBar() {
+
+  const { t } = useTranslation();
+
   return (
     <nav className="relative px-4 py-4 flex justify-between items-center bg-white shadow-lg">
       <a className="text-3xl font-bold leading-none" href="#">
@@ -18,7 +22,7 @@ function NavBar() {
                 : 'text-gray-400 text-sm hover:text-red-400'
             }
           >
-            Reminders
+            { t('navbar.reminders') }
           </NavLink>
         </li>
 
@@ -33,10 +37,13 @@ function NavBar() {
                 : 'text-gray-400 text-sm hover:text-red-400'
             }
           >
-            Settings
+
+          { t("navbar.settings") }
           </NavLink>
         </li>
       </ul>
+
+      <TranslationSwitcher />
     </nav>
   );
 }

@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
 
-import { Thead } from "../../../components";
-import { areYouSureAlert, successAlert } from "../../../helper";
 import { TableRow } from "./index";
-import { onCloseLoader, onOpenLoader } from "../../../../store";
+import { Thead } from "../../../components";
 import { getAllSettings, deleteSetting } from '../../../api';
+import { areYouSureAlert, successAlert } from "../../../helper";
+import { onCloseLoader, onOpenLoader } from "../../../../store";
 
 export const TableSettings = () => {
+  const { t } = useTranslation();
+
   const headers = [
-    'ID',
-    'Api Token Bot',
-    'Format Style',
-    'Description',
-    'Actions'
+    t('setting_index_page.id'),
+    t('setting_index_page.api_token_bot'),
+    t('setting_index_page.format_style'),
+    t('setting_index_page.description'),
+    t('setting_index_page.actions')
   ];
 
   const [data, setData] = useState([]);

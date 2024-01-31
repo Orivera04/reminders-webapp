@@ -6,19 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { areYouSureAlert, successAlert } from "../../../helper";
 import { useDispatch } from "react-redux";
 import { onCloseLoader, onOpenLoader } from "../../../../store";
+import { useTranslation } from "react-i18next";
 
 export const TableReminders = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const headers = [
-    'ID',
-    'Chat ID',
-    'Message',
-    'Reminder Type',
-    'Bot ID',
-    'Actions'
+    t('reminder_index_page.id'),
+    t('reminder_index_page.chat_id'),
+    t('reminder_index_page.message'),
+    t('reminder_index_page.reminder_type'),
+    t('reminder_index_page.bot_id'),
+    t('reminder_index_page.actions')
   ];
 
   const [reminders, setReminders] = useState(null);
@@ -28,17 +29,16 @@ export const TableReminders = () => {
 
     getReminders().then(response => {
       setReminders(response);
-      localStorage.setItem('storedReminders', JSON.stringify(response));
       dispatch( onCloseLoader() );
     })
     .catch(error => {
       console.log(error);
-      sweetAlert('Error', 'Error getting reminders there was an network error, please try again later.', 'error');
+      sweetAlert(t('error'), t('reminder_index_page.error_getting_reminders'), 'error');
     });
   }, [  ]);
 
   const onDelete = (reminderId) => {
-    areYouSureAlert(() => {
+    areYouSureAlert(t('reminder_index_page.title_modal_delete_reminder'), t('reminder_index_page.text_modal_delete_reminder') ,() => {
       deleteReminder(reminderId).then((message) => {
         const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
         setReminders(newReminders);

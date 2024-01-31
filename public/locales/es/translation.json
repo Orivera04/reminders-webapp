@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "settings": "Configuración",
+    "reminders": "Recordatorios"
+  },
+  "reminder_index_page": {
+    "actions": "Acciones",
+    "bot_id": "ID del Bot",
+    "chat_id": "ID del Chat",
+    "create_reminder": "Crear Recordatorio",
+    "error_getting_reminders": "Error al obtener los recordatorios, hubo un error de red, por favor inténtalo de nuevo más tarde.",
+    "error": "Error",
+    "id": "ID",
+    "message": "Mensaje",
+    "reminder_type": "Tipo de Recordatorio",
+    "reminders": "Recordatorios",
+    "text_modal_delete_reminder": "Una vez eliminado, no podrás recuperarlo.",
+    "title_modal_delete_reminder": "¿Estás seguro?"
+  },
+  "reminder_form_page": {
+    "bot_required": "Se requiere el Bot",
+    "bot": "Bot",
+    "chat_id_required": "Se requiere el ID del Chat",
+    "chat_id": "ID del Chat",
+    "create_reminder": "Crear Recordatorio",
+    "created_reminder": "El recordatorio ha sido creado.",
+    "daily": "Diaria",
+    "daily_schedules": "Programaciones Diarias",
+    "day_of_month": "Día del Mes",
+    "error_getting_reminder": "Error al obtener el recordatorio, hubo un error de red, por favor inténtalo de nuevo más tarde.",
+    "error_reminder": "Hubo un error al crear/actualizar el recordatorio, por favor inténtalo de nuevo más tarde.",
+    "error_sending_reminder": "Error al enviar el recordatorio, por favor inténtalo de nuevo más tarde.",
+    "error": "Error",
+    "execution_hour": "Hora de Ejecución",
+    "message_required": "Se requiere el Mensaje",
+    "message": "Mensaje",
+    "placeholder_chat_id": "Ingresa el ID de tu grupo de chat",
+    "placeholder_message": "Ingresa tu mensaje...",
+    "select_bot": "Selecciona un Bot",
+    "send_reminder_success": "El recordatorio ha sido enviado.",
+    "send_reminder": "Enviar Recordatorio",
+    "specific": "Especifica",
+    "specific_schedule": "Programación Específica",
+    "submit": "Enviar",
+    "success": "Éxito",
+    "type_schedule": "Tipo de Programación",
+    "updated_reminder": "El recordatorio ha sido actualizado.",
+    "weekdays": {
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    }
+  },
+
+  "setting_index_page": {
+    "configurations": "Bots",
+    "create_setting": "Crear bot",
+    "id": "ID",
+    "api_token_bot": "Token de API del bot",
+    "format_style": "Estilo de formato",
+    "description": "Descripción",
+    "actions": "Acciones"
+  },
+
+  "setting_form_page": {
+    "create_setting": "Crear bot",
+    "create": "Crear",
+    "update_setting": "Actualizar bot",
+    "update": "Actualizar",
+    "api_token_bot": "Token de API del bot",
+    "format_style": "Estilo de formato",
+    "description": "Descripción",
+    "select_an_option": "Seleccionar una opción"
+  }
+}

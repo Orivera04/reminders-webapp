@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
-      isLoading: false
+      isLoading: false,
     },
     reducers: {
       onOpenLoader: (state) => {

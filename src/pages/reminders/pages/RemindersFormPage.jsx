@@ -7,8 +7,10 @@ import { createReminder, getReminderById, updateReminder } from '../../../api/re
 import { useDispatch } from 'react-redux';
 import { onCloseLoader, onOpenLoader } from '../../../../store';
 import { SendReminder } from '../components/SendReminder';
+import { useTranslation } from 'react-i18next';
 
 export const RemindersFormPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -91,23 +93,23 @@ export const RemindersFormPage = () => {
     })
     .catch(error => {
       console.log(error);
-      sweetAlert('Error', 'Error getting reminder there was an network error, please try again later.', 'error');
+      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.error_getting_reminder'), 'error');
     });
   }, [ reminderForm.availableSettings ]);
 
   const isFormValid = () => {
     if (reminderForm.chatId === '') {
-      sweetAlert('Error', 'Chat ID is required', 'error');
+      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.chat_id_required'), 'error');
       return false;
     }
 
     if (reminderForm.message === '') {
-      sweetAlert('Error', 'Message is required', 'error');
+      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.message_required'), 'error');
       return false;
     }
 
     if (reminderForm.settingIdSelected === '') {
-      sweetAlert('Error', 'Setting is required', 'error');
+      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.bot_required'), 'error');
       return false;
     }
 
@@ -123,19 +125,18 @@ export const RemindersFormPage = () => {
 
     try {
       if (reminderForm.id) {
-        const responseMessage = await updateReminder(reminderForm);
-        sweetAlert('Success', responseMessage, 'success');
-
+        await updateReminder(reminderForm);
+        sweetAlert(t('reminder_form_page.success'), t('reminder_form_page.updated_reminder'), 'success');
       }
       else {
-        const responseMessage = await createReminder(reminderForm);
-        sweetAlert('Success', responseMessage, 'success');
+        await createReminder(reminderForm);
+        sweetAlert(t('reminder_form_page.success'), t('reminder_form_page.created_reminder'), 'success');
       }
 
       dispatch( onCloseLoader() );
       navigate('/reminders');
     } catch(error) {
-      sweetAlert('Error', 'Error creating reminder there was an network error, please try again later.', 'error');
+      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.error_reminder'), 'error');
     }
   };
 
@@ -148,17 +149,17 @@ export const RemindersFormPage = () => {
       <form onSubmit={ handleSubmit }>
         <div className='flex justify-center m-5'>
           <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow w-4/5 mr-10">
-              <h2 className="text-2xl font-bold mb-4">Create new reminder</h2>
+              <h2 className="text-2xl font-bold mb-4">{ t('reminder_form_page.create_reminder') }</h2>
               <div className="mb-4">
                 <label htmlFor="chatId" className="block text-gray-700 text-sm font-bold mb-2">
-                  Chat ID
+                { t('reminder_form_page.chat_id') }
                 </label>
                 <input
                   type="text"
                   id="chatId"
                   name="chatId"
                   className="w-full p-2 border rounded-md"
-                  placeholder="Enter your group chat ID"
+                  placeholder= { t('reminder_form_page.placeholder_chat_id') }
                   value = { reminderForm.chatId }
                   onChange={ onInputChanged }
                 />
@@ -166,14 +167,14 @@ export const RemindersFormPage = () => {
 
               <div className="mb-4">
                 <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-                  Message
+                { t('reminder_form_page.message') }
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   className="w-full p-2 border rounded-md"
                   rows="4"
-                  placeholder="Enter your message..."
+                  placeholder= { t('reminder_form_page.placeholder_message') }
                   value = { reminderForm.message }
                   onChange={ onInputChanged }
                 />
@@ -181,7 +182,7 @@ export const RemindersFormPage = () => {
 
               <div className="mb-4">
                 <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
-                  Type Schedule
+                { t('reminder_form_page.type_schedule') }
                 </label>
                 <select
                   id="typeScheduleId"
@@ -190,14 +191,14 @@ export const RemindersFormPage = () => {
                   value = { reminderForm.typeScheduleId }
                   onChange={ onTypeScheduleChanged }
                 >
-                  <option value="1">Daily</option>
-                  <option value="2">Specific</option>
+                  <option value="1">{ t('reminder_form_page.daily') }</option>
+                  <option value="2">{ t('reminder_form_page.specific') }</option>
                 </select>
               </div>
 
               <div className="mb-4">
                 <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
-                  Setting
+                { t('reminder_form_page.bot') }
                 </label>
                 <select
                   id="settingIdSelected"
@@ -207,7 +208,7 @@ export const RemindersFormPage = () => {
                   onChange={ onInputChanged }
                 >
 
-                  <option value=''>Select a setting</option>
+                  <option value=''>{ t('reminder_form_page.select_bot') }</option>
                   {
                     reminderForm.availableSettings?.map( (setting, _) => (
                       <option key={ setting.id } value={ setting.id }>{ setting.description }</option>
@@ -230,7 +231,7 @@ export const RemindersFormPage = () => {
                                             text-sm font-semibold text-white shadow-sm hover:bg-indigo-500
                                             focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
                                             focus-visible:outline-indigo-600 mb-1">
-            Submit
+          { t('reminder_form_page.submit') }
           </button>
         </div>
       </form>
