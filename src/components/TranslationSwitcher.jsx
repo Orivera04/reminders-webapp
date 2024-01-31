@@ -10,12 +10,14 @@ export const TranslationSwitcher = () => {
   const onChangeLanguage = (e) => {
     const newLanguage = e.target.value;
     i18n.changeLanguage(newLanguage);
+
     localStorage.setItem('language', newLanguage);
     setLanguage(newLanguage);
   }
 
   useEffect(() => {
     const languageSaved = localStorage.getItem('language');
+
     i18n.changeLanguage(languageSaved);
     setLanguage(languageSaved);
   }, [])
