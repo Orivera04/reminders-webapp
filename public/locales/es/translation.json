@@ -1,5 +1,6 @@
 {
   "navbar": {
+    "chats": "Chat",
     "settings": "Configuración",
     "reminders": "Recordatorios"
   },
@@ -18,9 +19,9 @@
     "title_modal_delete_reminder": "¿Estás seguro?"
   },
   "reminder_form_page": {
-    "bot_required": "Se requiere el Bot",
     "bot": "Bot",
-    "chat_id_required": "Se requiere el ID del Chat",
+    "chat": "Chat",
+    "chat_id_required": "Se requiere la referencia del chat",
     "chat_id": "ID del Chat",
     "create_reminder": "Crear Recordatorio",
     "created_reminder": "El recordatorio ha sido creado.",
@@ -34,9 +35,8 @@
     "execution_hour": "Hora de Ejecución",
     "message_required": "Se requiere el Mensaje",
     "message": "Mensaje",
-    "placeholder_chat_id": "Ingresa el ID de tu grupo de chat",
     "placeholder_message": "Ingresa tu mensaje...",
-    "select_bot": "Selecciona un Bot",
+    "select_a_chat": "Selecciona un chat",
     "send_reminder_success": "El recordatorio ha sido enviado.",
     "send_reminder": "Enviar Recordatorio",
     "specific": "Especifica",

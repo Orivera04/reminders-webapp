@@ -15,7 +15,7 @@ export const TableReminders = () => {
 
   const headers = [
     t('reminder_index_page.id'),
-    t('reminder_index_page.chat_id'),
+    t('reminder_index_page.chat_name'),
     t('reminder_index_page.message'),
     t('reminder_index_page.reminder_type'),
     t('reminder_index_page.bot_id'),
@@ -59,9 +59,9 @@ export const TableReminders = () => {
       <tbody>
         {
           reminders && reminders.map((reminder, _) => (
-            <TableRowReminder key={ reminder.id } id={ reminder.id } chatID={ reminder.chatID }
+            <TableRowReminder key={ reminder.id } id={ reminder.id }
               message={ reminder.message } reminderType={ reminder.reminderType }
-              BotName={ reminder.botName } handleDelete= { onDelete } handleUpdate= { onEdit } />
+              BotName={ reminder.botName } chatName= { reminder.chatName } handleDelete= { onDelete } handleUpdate= { onEdit } />
           ))
         }
       </tbody>

@@ -1,12 +1,14 @@
 {
   "navbar": {
+    "chats": "Chats",
     "settings": "Settings",
     "reminders": "Reminders"
   },
 
   "reminder_index_page": {
     "actions": "Actions",
-    "bot_id": "Bot ID",
+    "bot_id": "Bot",
+    "chat_name": "Chat",
     "chat_id": "Chat ID",
     "create_reminder": "Create Reminder",
     "error_getting_reminders": "Error getting reminders there was an network error, please try again later.",
@@ -22,8 +24,8 @@
   "reminder_form_page": {
     "bot_required": "Bot is required",
     "bot": "Bot",
-    "chat_id_required": "Chat ID is required",
-    "chat_id": "Chat ID",
+    "chat": "Chat",
+    "chat_id_required": "Chat is required",
     "create_reminder": "Create Reminder",
     "created_reminder": "The reminder has been created.",
     "daily": "Daily",
@@ -36,9 +38,8 @@
     "execution_hour": "Execution Hour",
     "message_required": "Message is required",
     "message": "Message",
-    "placeholder_chat_id": "Enter your group chat ID",
     "placeholder_message": "Enter your message...",
-    "select_bot": "Select Bot",
+    "select_a_chat": "Select a chat",
     "send_reminder_success": "The reminder has been sent.",
     "send_reminder": "Send Reminder",
     "specific": "Specific",
@@ -57,7 +58,6 @@
       "sunday": "Sunday"
     }
   },
-
   "setting_index_page": {
     "configurations": "Bots",
     "create_setting": "Create bot",
@@ -67,7 +67,6 @@
     "description": "Description",
     "actions": "Actions"
   },
-
   "setting_form_page": {
     "create_setting": "Create bot",
     "create": "Create",
@@ -77,5 +76,20 @@
     "format_style": "Format style",
     "description": "Description",
     "select_an_option": "Select an option"
+  },
+  "chat_index_page": {
+    "chat": "Chat",
+    "id": "ID",
+    "name": "Name",
+    "description": "Description",
+    "chat_id": "Chat ID",
+    "actions": "Actions",
+    "title_modal_delete_chat": "Are you sure?",
+    "text_modal_delete_chat": "Once deleted, you will not be able to recover it!",
+    "chat_deleted": "The chat has been deleted.",
+    "create_new_chat": "Create New Chat"
+  },
+  "chat_form_page": {
+    "chat": "Chat"
   }
 }

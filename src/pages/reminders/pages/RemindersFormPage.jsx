@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { getSettings } from '../../../api/settings';
 import { DailySchedules, SpecificSchedule } from '../components';
 import { DAILY_SCHEDULE, DEFAULT_DAILY_SCHEDULES, DEFAULT_SPECIFIC_SCHEDULE } from '../../../helper/constants';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { onCloseLoader, onOpenLoader } from '../../../../store';
 import { SendReminder } from '../components/SendReminder';
 import { useTranslation } from 'react-i18next';
+import { getAllChats } from '../../../api/chat';
 
 export const RemindersFormPage = () => {
   const { t } = useTranslation();
@@ -16,13 +16,12 @@ export const RemindersFormPage = () => {
   const navigate = useNavigate();
 
   const [reminderForm, setReminderForm] = useState({
-    id: null,
+    availableChats: [],
     chatId: '',
+    id: null,
     message: '',
-    typeScheduleId: DAILY_SCHEDULE,
-    availableSettings: [],
-    settingIdSelected: '',
-    schedules: DEFAULT_DAILY_SCHEDULES
+    schedules: DEFAULT_DAILY_SCHEDULES,
+    typeScheduleId: DAILY_SCHEDULE
   });
 
   const onInputChanged = ( {target} ) => {
@@ -53,28 +52,28 @@ export const RemindersFormPage = () => {
   };
 
   useEffect( () => {
-    const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
-    if (storedSettings === null) {
-      getSettings().then(response => {
+    const storedChats = JSON.parse(localStorage.getItem('storedChats'));
+    if (storedChats === null) {
+      getAllChats().then(response => {
 
         setReminderForm({
           ...reminderForm,
-          availableSettings: response,
+          availableChats: response,
         });
 
-        localStorage.setItem('storedSettings', JSON.stringify(response));
+        localStorage.setItem('storedChats', JSON.stringify(response));
         return;
       })
     }
 
     setReminderForm({
       ...reminderForm,
-      availableSettings: storedSettings,
+      availableChats: storedChats,
     });
   }, [  ]);
 
   useEffect( () => {
-    if (!id || reminderForm.availableSettings.length === 0) return;
+    if (!id || reminderForm.availableChats.length === 0) return;
 
     dispatch( onOpenLoader() );
 
@@ -85,7 +84,6 @@ export const RemindersFormPage = () => {
         chatId: response.chatId,
         message: response.message,
         typeScheduleId: response.typeScheduleId,
-        settingIdSelected: response.settingId,
         schedules: response.schedules
       });
 
@@ -95,7 +93,7 @@ export const RemindersFormPage = () => {
       console.log(error);
       sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.error_getting_reminder'), 'error');
     });
-  }, [ reminderForm.availableSettings ]);
+  }, [ reminderForm.availableChats ]);
 
   const isFormValid = () => {
     if (reminderForm.chatId === '') {
@@ -105,11 +103,6 @@ export const RemindersFormPage = () => {
 
     if (reminderForm.message === '') {
       sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.message_required'), 'error');
-      return false;
-    }
-
-    if (reminderForm.settingIdSelected === '') {
-      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.bot_required'), 'error');
       return false;
     }
 
@@ -150,19 +143,26 @@ export const RemindersFormPage = () => {
         <div className='flex justify-center m-5'>
           <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow w-4/5 mr-10">
               <h2 className="text-2xl font-bold mb-4">{ t('reminder_form_page.create_reminder') }</h2>
+
               <div className="mb-4">
-                <label htmlFor="chatId" className="block text-gray-700 text-sm font-bold mb-2">
-                { t('reminder_form_page.chat_id') }
+                <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
+                { t('reminder_form_page.chat') }
                 </label>
-                <input
-                  type="text"
+                <select
                   id="chatId"
                   name="chatId"
                   className="w-full p-2 border rounded-md"
-                  placeholder= { t('reminder_form_page.placeholder_chat_id') }
                   value = { reminderForm.chatId }
                   onChange={ onInputChanged }
-                />
+                >
+
+                  <option value=''>{ t('reminder_form_page.select_a_chat') }</option>
+                  {
+                    reminderForm.availableChats?.map( (chat, _) => (
+                      <option key={ chat.id } value={ chat.id }>{ chat.description }</option>
+                    ))
+                  }
+                </select>
               </div>
 
               <div className="mb-4">
@@ -193,27 +193,6 @@ export const RemindersFormPage = () => {
                 >
                   <option value="1">{ t('reminder_form_page.daily') }</option>
                   <option value="2">{ t('reminder_form_page.specific') }</option>
-                </select>
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="typeScheduleId" className="block text-gray-700 text-sm font-bold mb-2">
-                { t('reminder_form_page.bot') }
-                </label>
-                <select
-                  id="settingIdSelected"
-                  name="settingIdSelected"
-                  className="w-full p-2 border rounded-md"
-                  value = { reminderForm.settingIdSelected }
-                  onChange={ onInputChanged }
-                >
-
-                  <option value=''>{ t('reminder_form_page.select_bot') }</option>
-                  {
-                    reminderForm.availableSettings?.map( (setting, _) => (
-                      <option key={ setting.id } value={ setting.id }>{ setting.description }</option>
-                    ))
-                  }
                 </select>
               </div>
           </div>
