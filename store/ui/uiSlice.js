@@ -4,7 +4,6 @@ export const uiSlice = createSlice({
     name: 'ui',
     initialState: {
       isLoading: false,
-      language: 'en'
     },
     reducers: {
       onOpenLoader: (state) => {
