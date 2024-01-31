@@ -1,18 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from "react-i18next";
 import { errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helper';
 
 export const SettingForm = ({ type, onSave, setting }) => {
-  const formType = {
-    'create': {
-      'title': 'Create Setting',
-      'button': 'Create'
-    },
-    'update': {
-      'title': 'Update Setting',
-      'button': 'Update'
-    }
-  };
-
+  const { t } = useTranslation();
   const [formData, setFormData] = useState(SETTING_DEFAULT_FIELDS);
 
   useEffect(() => {
@@ -47,13 +38,13 @@ export const SettingForm = ({ type, onSave, setting }) => {
   return (
     <div className="bg-white px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"> { formType[type].title } </h2>
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"> { t(`setting_form_page.${type}_setting`) } </h2>
       </div>
 
       <form onSubmit={ handleSubmit } className="mx-auto mt-16 max-w-xl sm:mt-20">
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold leading-6 text-gray-900"> Token </label>
+            <label className="block text-sm font-semibold leading-6 text-gray-900"> { t('setting_form_page.api_token_bot') } </label>
             <div className="mt-2.5">
               <input
                 name='token_bot_api'
@@ -69,7 +60,9 @@ export const SettingForm = ({ type, onSave, setting }) => {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold leading-6 text-gray-900"> Format style </label>
+            <label className="block text-sm font-semibold leading-6 text-gray-900">
+              { t('setting_form_page.format_style') }
+            </label>
 
             <div className="relative mt-2.5">
               <select name='formatting_style_id'
@@ -78,7 +71,7 @@ export const SettingForm = ({ type, onSave, setting }) => {
                                     focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                           value={ formData.formatting_style_id }
                           onChange={ handleChange }>
-                  <option> Select an option </option>
+                  <option>  { t('setting_form_page.select_an_option') } </option>
                   <option value={ 1 }> Markdown </option>
                   <option value={ 2 }> HTML </option>
                 </select>
@@ -90,7 +83,9 @@ export const SettingForm = ({ type, onSave, setting }) => {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold leading-6 text-gray-900"> Description </label>
+            <label className="block text-sm font-semibold leading-6 text-gray-900">
+              { t('setting_form_page.description') }
+            </label>
             <div className="mt-2.5">
               <textarea name='description'
                         id="description"
@@ -110,7 +105,7 @@ export const SettingForm = ({ type, onSave, setting }) => {
                                           text-sm font-semibold text-white shadow-sm hover:bg-indigo-500
                                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
                                           focus-visible:outline-indigo-600">
-            { formType[type].button }
+            { t(`setting_form_page.${type}`) }
           </button>
         </div>
       </form>

@@ -54,5 +54,26 @@
       "saturday": "Sábado",
       "sunday": "Domingo"
     }
+  },
+
+  "setting_index_page": {
+    "configurations": "Bots",
+    "create_setting": "Crear bot",
+    "id": "ID",
+    "api_token_bot": "Token de API del bot",
+    "format_style": "Estilo de formato",
+    "description": "Descripción",
+    "actions": "Acciones"
+  },
+
+  "setting_form_page": {
+    "create_setting": "Crear bot",
+    "create": "Crear",
+    "update_setting": "Actualizar bot",
+    "update": "Actualizar",
+    "api_token_bot": "Token de API del bot",
+    "format_style": "Estilo de formato",
+    "description": "Descripción",
+    "select_an_option": "Seleccionar una opción"
   }
 }

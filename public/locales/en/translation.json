@@ -3,6 +3,7 @@
     "settings": "Settings",
     "reminders": "Reminders"
   },
+
   "reminder_index_page": {
     "actions": "Actions",
     "bot_id": "Bot ID",
@@ -17,6 +18,7 @@
     "text_modal_delete_reminder": "Once deleted, you will not be able to recover it!",
     "title_modal_delete_reminder": "Are you sure?"
   },
+
   "reminder_form_page": {
     "bot_required": "Bot is required",
     "bot": "Bot",
@@ -54,5 +56,26 @@
       "saturday": "Saturday",
       "sunday": "Sunday"
     }
+  },
+
+  "setting_index_page": {
+    "configurations": "Bots",
+    "create_setting": "Create bot",
+    "id": "ID",
+    "api_token_bot": "Api token bot",
+    "format_style": "Format style",
+    "description": "Description",
+    "actions": "Actions"
+  },
+
+  "setting_form_page": {
+    "create_setting": "Create bot",
+    "create": "Create",
+    "update_setting": "Update bot",
+    "update": "Update",
+    "api_token_bot": "Api token bot",
+    "format_style": "Format style",
+    "description": "Description",
+    "select_an_option": "Select an option"
   }
 }
