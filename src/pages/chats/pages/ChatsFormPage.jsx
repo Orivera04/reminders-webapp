@@ -57,7 +57,7 @@ export const ChatsFormPage = () => {
     getChatById(id).then(response => {
       setChatForm({
         ...chatForm,
-        id: null,
+        id: response.id,
         name: response.name,
         description: response.description,
         settingId: response.setting_id,
@@ -105,7 +105,7 @@ export const ChatsFormPage = () => {
 
     try {
       if (chatForm.id) {
-        await updateChat(chatForm);
+        await updateChat(id, chatForm);
         sweetAlert(t('chat_form_page.success'), t('chat_form_page.updated_chat'), 'success');
       }
       else {

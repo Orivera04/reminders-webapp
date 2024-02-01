@@ -38,11 +38,11 @@ export const createChat = async (chat) => {
   }
 }
 
-export const updateChat = async (id, chatData) => {
+export const updateChat = async (id, chat) => {
   try {
 
     const chatObject = {
-      name: chat.chatId,
+      name: chat.name,
       description: chat.description,
       setting_id: chat.settingId,
       chat_id: chat.chatId,
