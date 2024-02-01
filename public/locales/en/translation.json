@@ -23,7 +23,6 @@
     "text_modal_delete_reminder": "Once deleted, you will not be able to recover it!",
     "title_modal_delete_reminder": "Are you sure?"
   },
-
   "reminder_form_page": {
     "bot_required": "Bot is required",
     "bot": "Bot",

@@ -61,23 +61,23 @@
     }
   },
   "setting_index_page": {
-    "configurations": "Bots",
-    "create_setting": "Crear Bot",
+    "configurations": "Configuraciones de Bots",
+    "create_setting": "Crear bot",
     "id": "ID",
-    "api_token_bot": "Token de API del Bot",
-    "format_style": "Estilo de Formato",
+    "api_token_bot": "Token de API del bot",
+    "format_style": "Estilo de formato",
     "description": "Descripción",
     "actions": "Acciones"
   },
   "setting_form_page": {
-    "create_setting": "Crear Bot",
+    "create_setting": "Crear bot",
     "create": "Crear",
-    "update_setting": "Actualizar Bot",
+    "update_setting": "Actualizar bot",
     "update": "Actualizar",
-    "api_token_bot": "Token de API del Bot",
-    "format_style": "Estilo de Formato",
+    "api_token_bot": "Token de API del bot",
+    "format_style": "Estilo de formato",
     "description": "Descripción",
-    "select_an_option": "Selecciona una opción"
+    "select_an_option": "Seleccionar una opción"
   },
   "chat_index_page": {
     "actions": "Acciones",
