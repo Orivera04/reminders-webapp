@@ -1,4 +1,5 @@
 import swal from 'sweetalert';
+import i18n from "i18next";
 
 export const areYouSureAlert = (title, text, handleDelete) => {
   swal({
@@ -7,7 +8,7 @@ export const areYouSureAlert = (title, text, handleDelete) => {
     icon: "warning",
     buttons: true,
     dangerMode: true,
-    buttons: ["Select Patient?", "Speed Case?"],
+    buttons: [i18n.t('modals.cancel'), i18n.t('modals.confirm')],
   })
   .then((willDelete) => {
     if (!willDelete) return;
