@@ -10,7 +10,7 @@ export const getAllChats = async () => {
   }
 }
 
-export const getChat = async (id) => {
+export const getChatById = async (id) => {
   try {
     const { data } = await api.get(`/chats/${id}`);
 
@@ -20,9 +20,17 @@ export const getChat = async (id) => {
   }
 }
 
-export const createChat = async (chatData) => {
+export const createChat = async (chat) => {
   try {
-    const { data } = await api.post('/chats', chatData);
+
+    const chatObject = {
+      name: chat.chatId,
+      description: chat.description,
+      setting_id: chat.settingId,
+      chat_id: chat.chatId,
+    };
+
+    const { data } = await api.post('/chats', chatObject);
 
     return data;
   } catch(error) {
@@ -32,7 +40,15 @@ export const createChat = async (chatData) => {
 
 export const updateChat = async (id, chatData) => {
   try {
-    const { data } = await api.put(`/chats/${id}`, chatData);
+
+    const chatObject = {
+      name: chat.chatId,
+      description: chat.description,
+      setting_id: chat.settingId,
+      chat_id: chat.chatId,
+    };
+
+    const { data } = await api.put(`/chats/${id}`, chatObject);
 
     return data;
   } catch(error) {

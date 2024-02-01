@@ -38,7 +38,7 @@ export const TableReminders = () => {
   }, [  ]);
 
   const onDelete = (reminderId) => {
-    areYouSureAlert(t('reminder_index_page.title_modal_delete_reminder'), t('reminder_index_page.text_modal_delete_reminder') ,() => {
+    areYouSureAlert(t('reminder_index_page.title_modal_delete_reminder'), t('reminder_index_page.text_modal_delete_reminder'), () => {
       deleteReminder(reminderId).then((message) => {
         const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
         setReminders(newReminders);
