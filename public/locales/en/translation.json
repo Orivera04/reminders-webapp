@@ -11,17 +11,20 @@
   "reminder_index_page": {
     "actions": "Actions",
     "bot_id": "Bot",
-    "chat_name": "Chat",
     "chat_id": "Chat ID",
+    "chat_name": "Chat",
     "create_reminder": "Create Reminder",
+    "daily": "Daily",
+    "deleted_reminder": "The reminder has been deleted.",
     "error_getting_reminders": "Error getting reminders there was an network error, please try again later.",
     "error": "Error",
     "id": "ID",
     "message": "Message",
     "reminder_type": "Reminder Type",
     "reminders": "Reminders",
+    "specific": "Specific",
     "text_modal_delete_reminder": "Once deleted, you will not be able to recover it!",
-    "title_modal_delete_reminder": "Are you sure?"
+    "title_modal_delete_reminder": "Are you sure?",
   },
   "reminder_form_page": {
     "bot_required": "Bot is required",

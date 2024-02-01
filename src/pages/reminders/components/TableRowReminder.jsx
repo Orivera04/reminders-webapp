@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { ActionSection } from "../../../components"
 
 export const TableRowReminder = ({ id, chatName, message, reminderType, BotName, handleDelete, handleUpdate }) => {
+
+  const { t } = useTranslation();
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -16,7 +19,7 @@ export const TableRowReminder = ({ id, chatName, message, reminderType, BotName,
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        { reminderType }
+        { t(`reminder_index_page.${reminderType.toLowerCase()}`) }
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

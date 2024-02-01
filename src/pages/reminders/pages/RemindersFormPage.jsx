@@ -148,7 +148,7 @@ export const RemindersFormPage = () => {
                   <option value=''>{ t('reminder_form_page.select_a_chat') }</option>
                   {
                     reminderForm.availableChats?.map( (chat, _) => (
-                      <option key={ chat.id } value={ chat.id }>{ chat.description }</option>
+                      <option key={ chat.id } value={ chat.id }>{ chat.name }</option>
                     ))
                   }
                 </select>

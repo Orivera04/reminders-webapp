@@ -43,7 +43,7 @@ export const TableReminders = () => {
         const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
         setReminders(newReminders);
 
-        successAlert(message);
+        successAlert(t('reminder_index_page.deleted_reminder'));
       });
     })
   };
