@@ -37,13 +37,16 @@ export const TableChats = () => {
   }, [  ]);
 
   const onDelete = (chatId) => {
-    areYouSureAlert(t('chat_index_page.title_modal_delete_chat'), t('chat_index_page.text_modal_delete_chat') ,() => {
+    areYouSureAlert(t('chat_index_page.title_modal_delete_chat'), t('chat_index_page.text_modal_delete_chat'), () => {
       deleteChat(chatId).then((_) => {
         const newChats = chats.filter(reminder => reminder.id !== chatId);
         setChats(newChats);
 
         successAlert(t('chat_index_page.chat_deleted'));
-      });
+      }).catch((error) => {
+        console.error(error);
+        sweetAlert(t('chat_index_page.error'), t('chat_index_page.error_deleting_chat'), 'error');
+      });;
     })
   };
 

@@ -54,7 +54,7 @@ function NavBar() {
             }
           >
 
-          { t("navbar.settings") }
+          { t("navbar.bot") }
           </NavLink>
         </li>
       </ul>

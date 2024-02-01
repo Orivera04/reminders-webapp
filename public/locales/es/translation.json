@@ -1,32 +1,37 @@
 {
   "navbar": {
-    "chats": "Chat",
-    "settings": "Configuración",
+    "chats": "Chats",
+    "bot": "Bots",
     "reminders": "Recordatorios"
+  },
+  "modal": {
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
   },
   "reminder_index_page": {
     "actions": "Acciones",
-    "bot_id": "ID del Bot",
-    "chat_id": "ID del Chat",
+    "bot_id": "Bot",
+    "chat_name": "Chat",
+    "chat_id": "ID de Chat",
     "create_reminder": "Crear Recordatorio",
-    "error_getting_reminders": "Error al obtener los recordatorios, hubo un error de red, por favor inténtalo de nuevo más tarde.",
+    "error_getting_reminders": "Error al obtener recordatorios, hubo un error de red, por favor inténtalo de nuevo más tarde.",
     "error": "Error",
     "id": "ID",
     "message": "Mensaje",
     "reminder_type": "Tipo de Recordatorio",
     "reminders": "Recordatorios",
-    "text_modal_delete_reminder": "Una vez eliminado, no podrás recuperarlo.",
+    "text_modal_delete_reminder": "¡Una vez eliminado, no podrás recuperarlo!",
     "title_modal_delete_reminder": "¿Estás seguro?"
   },
   "reminder_form_page": {
+    "bot_required": "Se requiere el Bot",
     "bot": "Bot",
     "chat": "Chat",
-    "chat_id_required": "Se requiere la referencia del chat",
-    "chat_id": "ID del Chat",
+    "chat_id_required": "Se requiere el Chat",
     "create_reminder": "Crear Recordatorio",
     "created_reminder": "El recordatorio ha sido creado.",
-    "daily": "Diaria",
-    "daily_schedules": "Programaciones Diarias",
+    "daily": "Diario",
+    "daily_schedules": "Horarios Diarios",
     "day_of_month": "Día del Mes",
     "error_getting_reminder": "Error al obtener el recordatorio, hubo un error de red, por favor inténtalo de nuevo más tarde.",
     "error_reminder": "Hubo un error al crear/actualizar el recordatorio, por favor inténtalo de nuevo más tarde.",
@@ -39,11 +44,11 @@
     "select_a_chat": "Selecciona un chat",
     "send_reminder_success": "El recordatorio ha sido enviado.",
     "send_reminder": "Enviar Recordatorio",
-    "specific": "Especifica",
-    "specific_schedule": "Programación Específica",
+    "specific": "Específico",
+    "specific_schedule": "Horario Específico",
     "submit": "Enviar",
     "success": "Éxito",
-    "type_schedule": "Tipo de Programación",
+    "type_schedule": "Tipo de Horario",
     "updated_reminder": "El recordatorio ha sido actualizado.",
     "weekdays": {
       "monday": "Lunes",
@@ -55,25 +60,55 @@
       "sunday": "Domingo"
     }
   },
-
   "setting_index_page": {
     "configurations": "Bots",
-    "create_setting": "Crear bot",
+    "create_setting": "Crear Bot",
     "id": "ID",
-    "api_token_bot": "Token de API del bot",
-    "format_style": "Estilo de formato",
+    "api_token_bot": "Token de API del Bot",
+    "format_style": "Estilo de Formato",
     "description": "Descripción",
     "actions": "Acciones"
   },
-
   "setting_form_page": {
-    "create_setting": "Crear bot",
+    "create_setting": "Crear Bot",
     "create": "Crear",
-    "update_setting": "Actualizar bot",
+    "update_setting": "Actualizar Bot",
     "update": "Actualizar",
-    "api_token_bot": "Token de API del bot",
-    "format_style": "Estilo de formato",
+    "api_token_bot": "Token de API del Bot",
+    "format_style": "Estilo de Formato",
     "description": "Descripción",
-    "select_an_option": "Seleccionar una opción"
+    "select_an_option": "Selecciona una opción"
+  },
+  "chat_index_page": {
+    "actions": "Acciones",
+    "chat_deleted": "El chat ha sido eliminado.",
+    "chat_id": "ID de Chat",
+    "chat": "Chat",
+    "create_new_chat": "Crear Nuevo Chat",
+    "description": "Descripción",
+    "error": "Error",
+    "error_deleting_chat": "Error al eliminar el chat, intenta eliminar todas las referencias a este chat antes de borrarlo.",
+    "id": "ID",
+    "name": "Nombre",
+    "text_modal_delete_chat": "¡Una vez eliminado, no podrás recuperarlo!",
+    "title_modal_delete_chat": "¿Estás seguro?"
+  },
+  "chat_form_page": {
+    "bot": "Bot",
+    "chat_id_required": "Se requiere ID de Chat",
+    "chat_id": "ID de Chat",
+    "chat": "Chat",
+    "created_chat": "El chat ha sido creado.",
+    "description_required": "Se requiere Descripción",
+    "description": "Descripción",
+    "error_chat": "Hubo un error al crear/actualizar el chat, por favor inténtalo de nuevo más tarde.",
+    "error": "Error",
+    "name_required": "Se requiere Nombre",
+    "name": "Nombre",
+    "select_an_option": "Selecciona una opción",
+    "setting_id_required": "Se requiere Bot",
+    "submit": "Enviar",
+    "success": "Éxito",
+    "updated_chat": "El chat ha sido actualizado."
   }
 }

@@ -6,7 +6,7 @@ export const areYouSureAlert = (title, text, handleDelete) => {
     text: text,
     icon: "warning",
     buttons: true,
-    dangerMode: true,
+    dangerMode: true
   })
   .then((willDelete) => {
     if (!willDelete) return;

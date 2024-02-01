@@ -1,10 +1,13 @@
 {
   "navbar": {
     "chats": "Chats",
-    "settings": "Settings",
+    "bot": "Bots",
     "reminders": "Reminders"
   },
-
+  "modal": {
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
   "reminder_index_page": {
     "actions": "Actions",
     "bot_id": "Bot",
@@ -78,18 +81,34 @@
     "select_an_option": "Select an option"
   },
   "chat_index_page": {
+    "actions": "Actions",
+    "chat_deleted": "The chat has been deleted.",
+    "chat_id": "Chat ID",
     "chat": "Chat",
+    "create_new_chat": "Create New Chat",
+    "description": "Description",
+    "error_deleting_chat": "Error deleting chat, try to delete all references to this chat before deleting it.",
     "id": "ID",
     "name": "Name",
-    "description": "Description",
-    "chat_id": "Chat ID",
-    "actions": "Actions",
-    "title_modal_delete_chat": "Are you sure?",
     "text_modal_delete_chat": "Once deleted, you will not be able to recover it!",
-    "chat_deleted": "The chat has been deleted.",
-    "create_new_chat": "Create New Chat"
+    "title_modal_delete_chat": "Are you sure?"
   },
   "chat_form_page": {
-    "chat": "Chat"
+    "bot": "Bot",
+    "chat_id_required": "Chat ID is required",
+    "chat_id": "Chat ID",
+    "chat": "Chat",
+    "created_chat": "The chat has been created.",
+    "description_required": "Description is required",
+    "description": "Description",
+    "error_chat": "There was an error creating/updating the chat, please try again later.",
+    "error": "Error",
+    "name_required": "Name is required",
+    "name": "Name",
+    "select_an_option": "Select an option",
+    "setting_id_required": "Bot is required",
+    "submit": "Submit",
+    "success": "Success",
+    "updated_chat": "The chat has been updated."
   }
 }
