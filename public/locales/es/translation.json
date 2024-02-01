@@ -86,7 +86,9 @@
     "api_token_bot": "Token de API del bot",
     "format_style": "Estilo de formato",
     "description": "Descripción",
-    "select_an_option": "Seleccionar una opción"
+    "select_an_option": "Seleccionar una opción",
+    "error": "Error",
+    "all_fields_required": "Todos los campos son requeridos"
   },
   "chat_index_page": {
     "actions": "Acciones",

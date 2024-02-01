@@ -30,7 +30,7 @@ export const SettingForm = ({ type, onSave, setting }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!formDataIsValid()) return errorAlert('Error', 'All fields are required!');
+    if(!formDataIsValid()) return errorAlert(t('setting_form_page.error'), t('setting_form_page.all_fields_required'));
 
     onSave(formData);
   };
