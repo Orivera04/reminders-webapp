@@ -12,6 +12,7 @@ export const getReminders = async () => {
       typeSchedule: reminder.attributes.type_schedule,
       reminderType: reminder.attributes.type_schedule,
       botName: reminder.attributes.setting_name,
+      chatName: reminder.attributes.chat_name,
     }));
 
   } catch (error) {
@@ -45,7 +46,6 @@ export const createReminder = async (reminder) => {
       message: reminder.message,
       type_schedule_id: reminder.typeScheduleId,
       schedules: reminder.schedules,
-      setting_id: reminder.settingIdSelected
     };
 
     const response = await api.post('/reminders', reminderObject);
@@ -63,8 +63,7 @@ export const updateReminder = async (reminder) => {
       chat_id: reminder.chatId,
       message: reminder.message,
       type_schedule_id: reminder.typeScheduleId,
-      schedules: reminder.schedules,
-      setting_id: reminder.settingIdSelected
+      schedules: reminder.schedules
     };
 
     const response = await api.put(`/reminders/${reminder.id}`, reminderObject);

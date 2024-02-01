@@ -30,6 +30,22 @@ function NavBar() {
 
         <li>
           <NavLink
+            to="/chats"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-blue-600 text-sm hover:text-red-400'
+                : 'text-gray-400 text-sm hover:text-red-400'
+            }
+          >
+
+          { t('navbar.chats') }
+          </NavLink>
+        </li>
+
+        <Separator />
+
+        <li>
+          <NavLink
             to="/settings"
             className={({ isActive }) =>
               isActive
@@ -38,7 +54,7 @@ function NavBar() {
             }
           >
 
-          { t("navbar.settings") }
+          { t("navbar.bot") }
           </NavLink>
         </li>
       </ul>

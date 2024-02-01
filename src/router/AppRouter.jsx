@@ -3,6 +3,7 @@ import { RemindersRoutes } from "../pages/reminders/router/RemindersRoutes"
 import { SettingsRoutes } from "../pages/settings/router/SettingsRouter"
 import { useSelector } from "react-redux"
 import { Loader } from "../components/Loader"
+import { ChatsRoutes } from "../pages/chats/router/ChatsRoutes"
 
 
 export const AppRouter = () => {
@@ -16,6 +17,7 @@ export const AppRouter = () => {
         <Routes>
           <Route path="/reminders/*" element={<RemindersRoutes />} />
           <Route path="/settings/*" element={ <SettingsRoutes /> } />
+          <Route path="/chats/*" element={ <ChatsRoutes /> } />
 
           <Route path="*" element={<Navigate to="/reminders" replace={ true } />} />
         </Routes>

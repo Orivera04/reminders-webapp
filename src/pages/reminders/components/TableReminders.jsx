@@ -15,7 +15,7 @@ export const TableReminders = () => {
 
   const headers = [
     t('reminder_index_page.id'),
-    t('reminder_index_page.chat_id'),
+    t('reminder_index_page.chat_name'),
     t('reminder_index_page.message'),
     t('reminder_index_page.reminder_type'),
     t('reminder_index_page.bot_id'),
@@ -38,7 +38,7 @@ export const TableReminders = () => {
   }, [  ]);
 
   const onDelete = (reminderId) => {
-    areYouSureAlert(t('reminder_index_page.title_modal_delete_reminder'), t('reminder_index_page.text_modal_delete_reminder') ,() => {
+    areYouSureAlert(t('reminder_index_page.title_modal_delete_reminder'), t('reminder_index_page.text_modal_delete_reminder'), () => {
       deleteReminder(reminderId).then((message) => {
         const newReminders = reminders.filter(reminder => reminder.id !== reminderId);
         setReminders(newReminders);
@@ -59,9 +59,9 @@ export const TableReminders = () => {
       <tbody>
         {
           reminders && reminders.map((reminder, _) => (
-            <TableRowReminder key={ reminder.id } id={ reminder.id } chatID={ reminder.chatID }
+            <TableRowReminder key={ reminder.id } id={ reminder.id }
               message={ reminder.message } reminderType={ reminder.reminderType }
-              BotName={ reminder.botName } handleDelete= { onDelete } handleUpdate= { onEdit } />
+              BotName={ reminder.botName } chatName= { reminder.chatName } handleDelete= { onDelete } handleUpdate= { onEdit } />
           ))
         }
       </tbody>
