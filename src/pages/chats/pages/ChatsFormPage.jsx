@@ -29,48 +29,38 @@ export const ChatsFormPage = () => {
     });
   };
 
-  useEffect( () => {
-    const storedSettings = JSON.parse(localStorage.getItem('storedSettings'));
-    if (storedSettings === null) {
-      getSettings().then(response => {
-        setChatForm({
-          ...chatForm,
-          availableSettings: response,
-        });
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(onOpenLoader());
 
-        localStorage.setItem('storedSettings', JSON.stringify(response));
-        return;
-      })
-    }
+        const settingsResponse = await getSettings();
+        setChatForm((prevForm) => ({
+          ...prevForm,
+          availableSettings: settingsResponse,
+        }));
 
-    setChatForm({
-      ...chatForm,
-      availableSettings: storedSettings,
-    });
-  }, [  ]);
+        if (id && settingsResponse.length > 0) {
+          const chatData = await getChatById(id);
+          setChatForm((prevForm) => ({
+            ...prevForm,
+            id: chatData.id,
+            name: chatData.name,
+            description: chatData.description,
+            settingId: chatData.setting_id,
+            chatId: chatData.chat_id,
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        sweetAlert(t('chat_form_page.error'), t('chat_form_page.error_getting_data'), 'error');
+      } finally {
+        dispatch(onCloseLoader());
+      }
+    };
 
-  useEffect( () => {
-    if (!id || chatForm.availableSettings.length === 0) return;
-
-    dispatch( onOpenLoader() );
-
-    getChatById(id).then(response => {
-      setChatForm({
-        ...chatForm,
-        id: response.id,
-        name: response.name,
-        description: response.description,
-        settingId: response.setting_id,
-        chatId: response.chat_id
-      });
-
-      dispatch( onCloseLoader() );
-    })
-    .catch(error => {
-      console.log(error);
-      sweetAlert(t('chat_form_page.error'), t('chat_form_page.error_getting_chat'), 'error');
-    });
-  }, [ chatForm.availableSettings ]);
+    fetchData();
+  }, [id]);
 
   const isFormValid = () => {
     if (chatForm.chatId === '') {

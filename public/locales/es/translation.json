@@ -67,7 +67,9 @@
     "api_token_bot": "Token de API del bot",
     "format_style": "Estilo de formato",
     "description": "Descripción",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "title_modal_delete_setting": "¿Estás seguro?",
+    "text_modal_delete_setting": "¡Una vez eliminado, no podrás recuperarlo!"
   },
   "setting_form_page": {
     "create_setting": "Crear bot",

@@ -34,7 +34,7 @@ export const TableSettings = () => {
   }, []);
 
   const onDeleteSetting = (id) => {
-    areYouSureAlert( () => {
+    areYouSureAlert(t('setting_index_page.title_modal_delete_setting'), t('setting_index_page.text_modal_delete_setting'), () => {
       deleteSetting(id).then((message) => {
         let newData = [...data];
         newData = newData.filter((element) => element.id !== id);

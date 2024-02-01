@@ -51,49 +51,38 @@ export const RemindersFormPage = () => {
     });
   };
 
-  useEffect( () => {
-    const storedChats = JSON.parse(localStorage.getItem('storedChats'));
-    if (storedChats === null) {
-      getAllChats().then(response => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatch(onOpenLoader());
 
+        const chatOptions = await getAllChats();
         setReminderForm({
           ...reminderForm,
-          availableChats: response,
+          availableChats: chatOptions,
         });
 
-        localStorage.setItem('storedChats', JSON.stringify(response));
-        return;
-      })
-    }
+        if (id) {
+          const reminderData = await getReminderById(id);
+          setReminderForm(({
+            ...reminderForm,
+            id: reminderData.id,
+            chatId: reminderData.chatId,
+            message: reminderData.message,
+            typeScheduleId: reminderData.typeScheduleId,
+            schedules: reminderData.schedules,
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.error_getting_data'), 'error');
+      } finally {
+        dispatch(onCloseLoader());
+      }
+    };
 
-    setReminderForm({
-      ...reminderForm,
-      availableChats: storedChats,
-    });
-  }, [  ]);
-
-  useEffect( () => {
-    if (!id || reminderForm.availableChats.length === 0) return;
-
-    dispatch( onOpenLoader() );
-
-    getReminderById(id).then(response => {
-      setReminderForm({
-        ...reminderForm,
-        id: response.id,
-        chatId: response.chatId,
-        message: response.message,
-        typeScheduleId: response.typeScheduleId,
-        schedules: response.schedules
-      });
-
-      dispatch( onCloseLoader() );
-    })
-    .catch(error => {
-      console.log(error);
-      sweetAlert(t('reminder_form_page.error'), t('reminder_form_page.error_getting_reminder'), 'error');
-    });
-  }, [ reminderForm.availableChats ]);
+    fetchData();
+  }, [id]);
 
   const isFormValid = () => {
     if (reminderForm.chatId === '') {

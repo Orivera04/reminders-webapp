@@ -67,7 +67,9 @@
     "api_token_bot": "Api token bot",
     "format_style": "Format style",
     "description": "Description",
-    "actions": "Actions"
+    "actions": "Actions",
+    "title_modal_delete_setting": "Are you sure?",
+    "text_modal_delete_setting": "Once deleted, you will not be able to recover it!"
   },
   "setting_form_page": {
     "create_setting": "Create bot",
