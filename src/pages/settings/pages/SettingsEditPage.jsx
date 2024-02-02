@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { onCloseLoader, onOpenLoader } from '../../../../store';
 import { SettingForm } from '../components';
@@ -8,7 +9,7 @@ import { successAlert, errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helpe
 import { getSetting, updateSetting } from '../../../api';
 
 export const SettingsEditPage = () => {
-
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,8 +27,8 @@ export const SettingsEditPage = () => {
 
   const onUpdateSetting = (settingData) => {
     updateSetting(id, settingData)
-      .then((data) => {
-        successAlert(data.message)
+      .then(() => {
+        successAlert(t('setting_form_page.setting_updated_successfully'))
           .then(() => navigate('/settings'));
       })
       .catch((error) => errorAlert(error.message));
