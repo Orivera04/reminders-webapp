@@ -57,15 +57,15 @@ export const RemindersFormPage = () => {
         dispatch(onOpenLoader());
 
         const chatOptions = await getAllChats();
-        setReminderForm({
-          ...reminderForm,
+        setReminderForm((prevForm) => ({
+          ...prevForm,
           availableChats: chatOptions,
-        });
+        }));
 
         if (id) {
           const reminderData = await getReminderById(id);
-          setReminderForm(({
-            ...reminderForm,
+          setReminderForm((prevForm) => ({
+            ...prevForm,
             id: reminderData.id,
             chatId: reminderData.chatId,
             message: reminderData.message,
