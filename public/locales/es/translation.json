@@ -76,7 +76,8 @@
     "description": "Descripción",
     "actions": "Acciones",
     "title_modal_delete_setting": "¿Estás seguro?",
-    "text_modal_delete_setting": "¡Una vez eliminado, no podrás recuperarlo!"
+    "text_modal_delete_setting": "¡Una vez eliminado, no podrás recuperarlo!",
+    "setting_deleted_successfully": "Bot eliminado correctamente"
   },
   "setting_form_page": {
     "create_setting": "Crear bot",
@@ -88,7 +89,9 @@
     "description": "Descripción",
     "select_an_option": "Seleccionar una opción",
     "error": "Error",
-    "all_fields_required": "Todos los campos son requeridos"
+    "all_fields_required": "Todos los campos son requeridos",
+    "setting_created_successfully": "Bot creado correctamente",
+    "setting_updated_successfully": "Bot actualizado correctamente"
   },
   "chat_index_page": {
     "actions": "Acciones",
