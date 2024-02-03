@@ -1,4 +1,4 @@
-import { UpdateButton, DeleteButton } from "./index"
+import { UpdateButton, DeleteButton } from "./"
 
 export const ActionSection = ({ id, onDelete, onUpdate }) => {
   return (

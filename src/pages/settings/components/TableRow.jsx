@@ -1,8 +1,7 @@
-import { MarkDownBadge, HtmlBadge } from './index'
-import { ActionSection } from "../../../components/index"
+import { ActionSection } from '../../../components';
+import { MarkDownBadge, HtmlBadge } from './'
 
 const MARKDOWN_STYLE = 1;
-const HTML_STYLE = 2;
 
 export const TableRow = ({ element, onDelete, onUpdate }) => {
   return (

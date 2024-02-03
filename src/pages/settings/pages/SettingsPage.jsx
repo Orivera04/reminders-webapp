@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { TableSettings } from "../components/index"
 import { useTranslation } from "react-i18next"
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -13,7 +15,7 @@ export const SettingsPage = () => {
           </h1>
         </div>
         <div className="text-right">
-          <a href="/settings/new"
+          <a onClick={ () => navigate('/settings/new') }
              className="bg-blue-500 hover:bg-blue-600 text-white font-bold
                           py-2 px-4 rounded-full shadow-md transition duration-300
                           ease-in-out transform hover:scale-105">
