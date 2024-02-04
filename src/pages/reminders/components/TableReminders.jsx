@@ -53,7 +53,7 @@ export const TableReminders = () => {
   }
 
   return (
-    <table className="min-w-full leading-normal">
+    <table className="min-w-full leading-normal" data-testid="reminder-table">
       <Thead headers={ headers } />
 
       <tbody>

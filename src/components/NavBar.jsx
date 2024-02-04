@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Separator, TranslationSwitcher } from './index';
+import { Separator, TranslationSwitcher } from './';
 import { useTranslation } from 'react-i18next';
 
 function NavBar() {

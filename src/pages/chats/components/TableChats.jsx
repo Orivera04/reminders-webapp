@@ -55,7 +55,7 @@ export const TableChats = () => {
   }
 
   return (
-    <table className="min-w-full leading-normal">
+    <table className="min-w-full leading-normal" data-testid="chat-table">
       <Thead headers={ headers } />
 
       <tbody>

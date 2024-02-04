@@ -20,11 +20,11 @@ export const TranslationSwitcher = () => {
 
     i18n.changeLanguage(languageSaved);
     setLanguage(languageSaved);
-  }, [])
+  }, []);
 
   return (
     <div>
-      <select onChange={ onChangeLanguage } className='font-sans' value={ language }>
+      <select onChange={ onChangeLanguage } className='font-sans' value={ language } data-testid='language-selector'>
         <option value="en">🇺🇸</option>
         <option value="es">🇪🇸</option>
       </select>

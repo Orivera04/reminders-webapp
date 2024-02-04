@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getEnvironments } from '.';
+import { getEnvironments } from './getEnviroments';
 
 const { VITE_REMINDER_SERVER_URL } = getEnvironments();
 
