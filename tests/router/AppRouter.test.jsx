@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import { AppRouter } from "../../src/router/AppRouter";
 import { Provider } from 'react-redux';
 import { store } from '../../store';
@@ -20,7 +20,7 @@ jest.mock('../../src/api/reminders', () => ({
 
 
 describe('AppRouter', () => {
-  it('should render the AppRouter', () => {
+  it('should render the AppRouter', async() => {
 
     expect(store.getState().ui.isLoading).toBe(false);
 
@@ -32,11 +32,12 @@ describe('AppRouter', () => {
       </Provider>
     );
 
+    await waitFor(() => {
+      const loadingComponent = screen.getByTestId('three-dots-loading');
 
-    const loadingComponent = screen.getByTestId('three-dots-loading');
-
-    expect(loadingComponent).toBeTruthy();
-    expect(store.getState().ui.isLoading).toBe(true);
+      expect(loadingComponent).toBeTruthy();
+      expect(store.getState().ui.isLoading).toBe(true);
+    });
   });
 
   it('should render the AppRouter with the reminders route', async() => {
@@ -55,7 +56,7 @@ describe('AppRouter', () => {
     expect(table).toBeTruthy();
   });
 
-  it('should render the AppRouter with the reminders route', async() => {
+  it('should render the AppRouter with the settings route', async() => {
 
     await act(async () => {
       render(
