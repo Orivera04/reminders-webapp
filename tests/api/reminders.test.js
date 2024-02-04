@@ -47,7 +47,6 @@ describe("Reminder API Functions", () => {
     api.get.mockResolvedValue({ data: mockReminder });
     const reminder = await getReminderById(reminderId);
 
-    console.log(reminder);
     expect(reminder).toEqual(
       {
         id: 'uJpI29',

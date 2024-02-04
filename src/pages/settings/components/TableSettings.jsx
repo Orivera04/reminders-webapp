@@ -50,7 +50,7 @@ export const TableSettings = () => {
 
   return (
     <div>
-      <table className="min-w-full leading-normal">
+      <table className="min-w-full leading-normal" data-testid="setting-table">
         <Thead headers={ headers } />
         <tbody>
           {
