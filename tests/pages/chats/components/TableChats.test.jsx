@@ -18,10 +18,6 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => jest.fn(),
 }));
 
-jest.mock('../../../../store/ui/uiSlice', () => ({
-  onOpenLoader: jest.fn(),
-  onCloseLoader: jest.fn(),
-}));
 
 describe('TableChats', () => {
   it('renders table with chat data', async () => {
