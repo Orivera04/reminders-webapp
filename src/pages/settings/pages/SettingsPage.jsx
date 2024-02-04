@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { TableSettings } from "../components/index"
 import { useTranslation } from "react-i18next"
+import { TableSettings } from "../components"
 
 export const SettingsPage = () => {
   const { t } = useTranslation();
@@ -24,11 +24,7 @@ export const SettingsPage = () => {
         </div>
       </div>
 
-      <div className="m-10">
-        <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden mt-5">
-          <TableSettings />
-        </div>
-      </div>
+      <TableSettings />
     </>
   )
 }

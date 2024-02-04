@@ -128,9 +128,9 @@ export const RemindersFormPage = () => {
         !!id && <SendReminder reminderId= { id } />
       }
 
-      <form onSubmit={ handleSubmit }>
-        <div className='flex justify-center m-5'>
-          <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow w-4/5 mr-10">
+      <form onSubmit={ handleSubmit } >
+        <div className='flex justify-center flex-col sm:flex-row'>
+          <div className="flex-1 max-w-2xl p-6 bg-white rounded-md shadow m-0 mb-5 sm:m-5">
               <h2 className="text-2xl font-bold mb-4">{ t('reminder_form_page.create_reminder') }</h2>
 
               <div className="mb-4">
@@ -194,7 +194,6 @@ export const RemindersFormPage = () => {
               ? <DailySchedules handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
               : <SpecificSchedule handleScheduleChange={ onScheduleChanged } schedules= { reminderForm.schedules } />
           }
-
         </div>
 
         <div className='flex justify-center'>

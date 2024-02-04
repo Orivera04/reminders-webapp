@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-
 import { onCloseLoader, onOpenLoader } from '../../../../store';
 import { SettingForm } from '../components';
-import { successAlert, errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helper';
 import { getSetting, updateSetting } from '../../../api';
+import { successAlert, errorAlert, SETTING_DEFAULT_FIELDS } from '../../../helper';
 
 export const SettingsEditPage = () => {
   const { t } = useTranslation();

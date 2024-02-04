@@ -33,3 +33,14 @@ export const SETTING_DEFAULT_FIELDS = {
   formatting_style_id: '',
   description: ''
 }
+
+export const FORMATTING_STYLES = {
+  1: {
+    'content': 'Markdown',
+    'color': 'green'
+  },
+  2: {
+    'content': 'HTML',
+    'color': 'blue'
+  }
+};

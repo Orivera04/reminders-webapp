@@ -1,5 +1,5 @@
   import { useNavigate } from "react-router-dom";
-  import { Button } from "../../settings/components"
+  import { Button } from "../../../components"
   import { TableReminders } from "../components"
   import { useTranslation } from "react-i18next";
 
@@ -22,12 +22,7 @@
           </div>
         </div>
 
-        <div className="m-10">
-          <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden mt-5">
-            <TableReminders />
-          </div>
-        </div>
-
+        <TableReminders />
       </>
     )
   }
