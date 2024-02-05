@@ -143,6 +143,7 @@ export const RemindersFormPage = () => {
                   className="w-full p-2 border rounded-md"
                   value = { reminderForm.chatId }
                   onChange={ onInputChanged }
+                  data-testid="chatId"
                 >
 
                   <option value=''>{ t('reminder_form_page.select_a_chat') }</option>
@@ -156,7 +157,7 @@ export const RemindersFormPage = () => {
 
               <div className="mb-4">
                 <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-                { t('reminder_form_page.message') }
+                  { t('reminder_form_page.message') }
                 </label>
                 <textarea
                   id="message"
@@ -166,6 +167,7 @@ export const RemindersFormPage = () => {
                   placeholder= { t('reminder_form_page.placeholder_message') }
                   value = { reminderForm.message }
                   onChange={ onInputChanged }
+                  data-testid="message"
                 />
               </div>
 
@@ -179,6 +181,7 @@ export const RemindersFormPage = () => {
                   className="w-full p-2 border rounded-md"
                   value = { reminderForm.typeScheduleId }
                   onChange={ onTypeScheduleChanged }
+                  data-testid="typeScheduleId"
                 >
                   <option value="1">{ t('reminder_form_page.daily') }</option>
                   <option value="2">{ t('reminder_form_page.specific') }</option>

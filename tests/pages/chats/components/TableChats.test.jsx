@@ -18,7 +18,6 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => jest.fn(),
 }));
 
-
 describe('TableChats', () => {
   it('renders table with chat data', async () => {
     render(<TableChats />);

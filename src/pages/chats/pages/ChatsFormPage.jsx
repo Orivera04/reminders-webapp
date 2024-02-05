@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { createChat, getChatById, updateChat } from "../../../api/chat";
 import { useDispatch } from "react-redux";
 import { onCloseLoader, onOpenLoader } from "../../../../store";
+import { errorAlert, successAlert } from "../../../helper";
 
 export const ChatsFormPage = () => {
 
@@ -53,7 +54,7 @@ export const ChatsFormPage = () => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
-        sweetAlert(t('chat_form_page.error'), t('chat_form_page.error_getting_data'), 'error');
+        errorAlert(t('chat_form_page.error_getting_data'))
       } finally {
         dispatch(onCloseLoader());
       }
@@ -64,22 +65,22 @@ export const ChatsFormPage = () => {
 
   const isFormValid = () => {
     if (chatForm.chatId === '') {
-      sweetAlert(t('chat_form_page.error'), t('chat_form_page.chat_id_required'), 'error');
+      errorAlert(t('chat_form_page.chat_id_required'))
       return false;
     }
 
     if (chatForm.name === '') {
-      sweetAlert(t('chat_form_page.error'), t('chat_form_page.name_required'), 'error');
+      errorAlert(t('chat_form_page.name_required'))
       return false;
     }
 
     if (chatForm.description === '') {
-      sweetAlert(t('chat_form_page.error'), t('chat_form_page.description_required'), 'error');
+      errorAlert(t('chat_form_page.description_required'))
       return false;
     }
 
     if (chatForm.settingId === '') {
-      sweetAlert(t('chat_form_page.error'), t('chat_form_page.setting_id_required'), 'error');
+      errorAlert(t('chat_form_page.setting_id_required'))
       return false;
     }
 
@@ -96,17 +97,17 @@ export const ChatsFormPage = () => {
     try {
       if (chatForm.id) {
         await updateChat(id, chatForm);
-        sweetAlert(t('chat_form_page.success'), t('chat_form_page.updated_chat'), 'success');
+        successAlert(t('chat_form_page.updated_chat'));
       }
       else {
         await createChat(chatForm);
-        sweetAlert(t('chat_form_page.success'), t('chat_form_page.created_chat'), 'success');
+        successAlert(t('chat_form_page.created_chat'));
       }
 
       dispatch( onCloseLoader() );
       navigate('/chats');
     } catch(error) {
-      sweetAlert(t('chat_form_page.error'), t('chat_form_page.error_chat'), 'error');
+      errorAlert(t('chat_form_page.error_chat'));
     }
   }
 
