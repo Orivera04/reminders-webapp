@@ -6,7 +6,7 @@ export const TableDataRows = ({ translation_block, headers, data}) => {
 
   return (
     <tr className='text-sm border border-slate-200 flex flex-col mb-6 py-1 divide-y
-                  divide-y-slate-50 sm:border-0 sm:table-row sm:mb-0 sm:py-0 sm:divide-none'>
+                  divide-y-slate-50 sm:table-row sm:mb-0 sm:py-0 shadow-lg md:shadow-none'>
       {
         headers.map((header) => (
           <td key={ `${header}-${data.id}` }

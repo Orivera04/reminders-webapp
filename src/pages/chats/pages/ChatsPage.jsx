@@ -12,10 +12,12 @@ export const ChatsPage = () => {
   };
 
   return (
-    <>
-      <div className="flex justify-between items-center m-10">
-        <div className="text-left mr-10">
-          <h1 className="text-2xl text-gray-800 text-center font-medium py-2">{ t("chat_index_page.chat") }</h1>
+    <div className="container mx-auto">
+      <div className="flex justify-between items-center my-10 w-full">
+        <div className="text-left">
+          <h1 className="text-2xl text-gray-800 text-center font-medium">
+            { t("chat_index_page.chat") }
+          </h1>
         </div>
 
         <div className="text-right">
@@ -24,6 +26,6 @@ export const ChatsPage = () => {
       </div>
 
       <TableChats />
-    </>
+    </div>
   )
 }
