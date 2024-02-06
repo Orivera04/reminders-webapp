@@ -6,7 +6,7 @@
 
 
 ## 🚀 How to use it:
-1. Start by booting up the backend service. For detailed instructions, please refer to the [Reminders API GitHub repository](https://github.com/Orivera04/Reminders-API/edit/main/README.md).
+1. Start by booting up the backend service. For detailed instructions, please refer to the [Reminders API GitHub repository](https://github.com/Orivera04/Reminders-API).
 2. Clone this project to your local environment.
 3. Run `yarn install` to install dependencies.
 4. Configure the URL of the backend you set up in step one within the environment file. Create a `.env` file and add the necessary variables listed in `.env.template`.
