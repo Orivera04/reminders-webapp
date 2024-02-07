@@ -16,7 +16,7 @@ export const DailySchedules = ({ handleScheduleChange, schedules }) => {
             name={ day }
             value={ executionTime }
             onChange={ handleScheduleChange }
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md appearance-none bg-white"
           />
         </div>
       ))}

@@ -28,7 +28,7 @@ export const SpecificSchedule = ({ handleScheduleChange, schedules }) => {
         <label className="block text-gray-700 text-sm font-bold mb-2">{ t('reminder_form_page.execution_hour') }</label>
         <input
           type="time"
-          className="w-full p-2 border rounded-md"
+          className="w-full p-2 border rounded-md appearance-none bg-white"
           name="hour_of_execution"
           value={ schedules.hour_of_execution }
           onChange={ handleScheduleChange }
