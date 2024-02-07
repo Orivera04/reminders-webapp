@@ -1,39 +1,22 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { TableDataRows } from "./TableDataRows";
 import { ActionSection } from "./ActionSection";
 
 
 export const TableData = ({ translation_block, data, onDelete, onUpdate }) => {
   const [headers, setHeaders] = useState([]);
-  const [dataFormated, setDataFormated] = useState([]);
   const { t } = useTranslation();
 
   useEffect(() => {
     const newHeaders = buildHeaders();
-    const newData = buildNewData();
 
     setHeaders(newHeaders);
-    setDataFormated(newData);
   }, [data])
 
   const buildHeaders = () => {
     const headerKeys = Object.keys(data[0] || []);
 
     return [...headerKeys, ['actions']];
-  }
-
-  const buildNewData = () => {
-    return data.map((element) => (
-      headers.reduce((acc, header) => {
-        acc[`${translation_block}.${header}`] = element[header] ||
-                                                <ActionSection id={ element.id }
-                                                               onDelete={ onDelete }
-                                                               onUpdate={ onUpdate } />;
-        return acc;
-      }, {})
-    ))
   }
 
   return (
@@ -54,8 +37,22 @@ export const TableData = ({ translation_block, data, onDelete, onUpdate }) => {
 
       <tbody className='bg-white dark:bg-transparent'>
         {
-          dataFormated.map((element) => (
-            <TableDataRows key={element.id} translation_block={ translation_block } headers={ headers } data={ element } />
+          data.map((element) => (
+            <tr key={ element.id }
+                className='text-sm border border-slate-200 flex flex-col mb-6 py-1 divide-y
+                            divide-y-slate-50 sm:table-row sm:mb-0 sm:py-0 shadow-lg md:shadow-none'>
+              {
+                headers.map((header) => (
+                  <td key={ `${header}-${element.id}` }
+                      data-label={ t(`${translation_block}.${header}`) }
+                      className='flex flex-col px-4 py-2 sm:table-cell sm:py-4 lg:table-cell
+                                before:content-[attr(data-label)] sm:before:content-none
+                                before:text-[0.625rem] before:uppercase before:font-medium'>
+                    { element[header] || <ActionSection id={ element.id } onDelete={ onDelete } onUpdate={ onUpdate } /> }
+                  </td>
+                ))
+              }
+            </tr>
           ))
         }
       </tbody>

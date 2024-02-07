@@ -16,7 +16,7 @@ export const TranslationSwitcher = () => {
   }
 
   useEffect(() => {
-    const languageSaved = localStorage.getItem('language');
+    const languageSaved = localStorage.getItem('language') || 'en';
 
     i18n.changeLanguage(languageSaved);
     setLanguage(languageSaved);
@@ -24,7 +24,7 @@ export const TranslationSwitcher = () => {
 
   return (
     <div>
-      <select onChange={ onChangeLanguage } className='font-sans' value={ language } data-testid='language-selector'>
+      <select onChange={ onChangeLanguage } className='appearance-none' value={ language } data-testid='language-selector'>
         <option value="en">🇺🇸</option>
         <option value="es">🇪🇸</option>
       </select>
