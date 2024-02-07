@@ -24,17 +24,11 @@ export const SendReminder = ({ reminderId }) => {
   }
 
   return (
-    <div className='flex'>
-        <div className="w-1/2"></div>
-        <div className="w-1/2 h-12">
-          <div className='flex justify-center'>
-            <button onClick={ () => onSendReminder(reminderId) } className='flex bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4'>
-              <FontAwesomeIcon icon={ faMessage } />
-              &nbsp;
-              { t('reminder_form_page.send_reminder') }
-            </button>
-          </div>
-        </div>
+    <div className='flex m-5 justify-end'>
+      <button onClick={ () => onSendReminder(reminderId) } className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
+        <FontAwesomeIcon icon={ faMessage } className="mr-1"/>
+        { t('reminder_form_page.send_reminder') }
+      </button>
     </div>
   )
 }

@@ -1,40 +1,31 @@
 import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from 'react';
-
-import { TableRow } from "./index";
-import { Thead } from "../../../components";
+import { TableData, Badge } from "../../../components";
 import { getAllSettings, deleteSetting } from '../../../api';
-import { areYouSureAlert, successAlert } from "../../../helper";
 import { onCloseLoader, onOpenLoader } from "../../../../store";
+import { areYouSureAlert, successAlert, FORMATTING_STYLES } from "../../../helper";
 
 export const TableSettings = () => {
   const { t } = useTranslation();
-
-  const headers = [
-    t('setting_index_page.id'),
-    t('setting_index_page.api_token_bot'),
-    t('setting_index_page.format_style'),
-    t('setting_index_page.description'),
-    t('setting_index_page.actions')
-  ];
-
-  const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     dispatch(onOpenLoader());
-
     getAllSettings().then((data) => {
-      setData(data);
+      const dataFormated = formattingStyleIdFormat(data);
+      setData(dataFormated);
       dispatch(onCloseLoader());
     });
   }, []);
 
   const onDeleteSetting = (id) => {
-    areYouSureAlert(t('setting_index_page.title_modal_delete_setting'), t('setting_index_page.text_modal_delete_setting'), () => {
+    areYouSureAlert(t('setting_index_page.title_modal_delete_setting'),
+                    t('setting_index_page.text_modal_delete_setting'),
+                    () => {
       deleteSetting(id).then(() => {
         let newData = [...data];
         newData = newData.filter((element) => element.id !== id);
@@ -44,22 +35,20 @@ export const TableSettings = () => {
     })
   }
 
+  const formattingStyleIdFormat = (data) => {
+    return data.map((element) => {
+      const { content, color } = FORMATTING_STYLES[element.formatting_style_id];
+      element.formatting_style_id = <Badge content={ content } color={ color } />;
+
+      return element
+  });
+  }
+
   const onUpdateSetting = (id) => {
     navigate(`/settings/${id}/edit`);
   }
 
   return (
-    <div>
-      <table className="min-w-full leading-normal" data-testid="setting-table">
-        <Thead headers={ headers } />
-        <tbody>
-          {
-            data.map((element) => (
-              <TableRow key={element.id} element={ element } onDelete={ onDeleteSetting } onUpdate={ onUpdateSetting } />
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
+    <TableData translation_block={ 'setting_index_page' } data={ data } onDelete={ onDeleteSetting } onUpdate={ onUpdateSetting }/>
   )
 }

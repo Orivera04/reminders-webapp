@@ -68,11 +68,11 @@
     }
   },
   "setting_index_page": {
-    "configurations": "Configuraciones de Bots",
+    "configurations": "Bots",
     "create_setting": "Crear bot",
     "id": "ID",
-    "api_token_bot": "Token de API del bot",
-    "format_style": "Estilo de formato",
+    "token_bot_api": "Token de API del bot",
+    "formatting_style_id": "Estilo de formato",
     "description": "Descripción",
     "actions": "Acciones",
     "title_modal_delete_setting": "¿Estás seguro?",

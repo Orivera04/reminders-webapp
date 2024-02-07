@@ -1,33 +1,25 @@
 import { useEffect, useState } from "react";
-import { Thead } from "../../../components";
+import { TableData } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { areYouSureAlert, successAlert } from "../../../helper";
 import { useDispatch } from "react-redux";
 import { onCloseLoader, onOpenLoader } from "../../../../store";
 import { useTranslation } from "react-i18next";
 import { deleteChat, getAllChats } from "../../../api/chat";
-import { TableRowChat } from "./TableRowChat";
 
 export const TableChats = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const headers = [
-    t('chat_index_page.id'),
-    t('chat_index_page.name'),
-    t('chat_index_page.description'),
-    t('chat_index_page.chat_id'),
-    t('chat_index_page.actions')
-  ];
-
-  const [chats, setChats] = useState(null);
+  const [chats, setChats] = useState([]);
 
   useEffect(() => {
     dispatch( onOpenLoader() );
 
     getAllChats().then(response => {
-      setChats(response);
+      const newChatData = buildChatsData(response);
+      setChats(newChatData);
       dispatch( onCloseLoader() );
     })
     .catch(error => {
@@ -54,19 +46,18 @@ export const TableChats = () => {
     navigate(`/chats/edit/${reminderId}`);
   }
 
-  return (
-    <table className="min-w-full leading-normal" data-testid="chat-table">
-      <Thead headers={ headers } />
+  const buildChatsData = (chatsData) => {
+    return chatsData.map((chat) => (
+      {
+        'id': chat.id,
+        'name': chat.name,
+        'description': chat.description,
+        'chat_id': chat.chat_id
+      }
+    ))
+  }
 
-      <tbody>
-        {
-          chats && chats.map((chat, _) => (
-            <TableRowChat key={ chat.id } id={ chat.id } name={ chat.name }
-                          description={ chat.description } chatId={ chat.chat_id }
-                          handleDelete= { onDelete } handleUpdate= { onEdit } />
-          ))
-        }
-      </tbody>
-    </table>
+  return (
+    <TableData translation_block={ 'chat_index_page' } data={ chats } onDelete={ onDelete } onUpdate={ onEdit }/>
   )
 }

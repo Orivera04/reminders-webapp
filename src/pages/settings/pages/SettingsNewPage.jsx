@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { SettingForm } from '../components';
-import { successAlert, errorAlert } from '../../../helper'
 import { createSetting } from '../../../api';
+import { successAlert, errorAlert } from '../../../helper'
 
 export const SettingsNewPage = () => {
   const { t } = useTranslation();
