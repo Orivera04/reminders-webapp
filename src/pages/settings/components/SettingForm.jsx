@@ -67,8 +67,8 @@ export const SettingForm = ({ type, onSave, setting }) => {
             <div className="relative mt-2.5">
               <select name='formatting_style_id'
                           id="format"
-                          className="absolute w-full h-full inset-y-0 rounded-md border-0 bg-transparent bg-none pl-2 text-gray-400
-                                    focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+                          className="absolute w-full h-full inset-y-0 rounded-md border-0 bg-transparent bg-none pl-2 text-gray-900
+                                    focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm appearance-none z-10"
                           value={ formData.formatting_style_id }
                           onChange={ handleChange }>
                   <option>  { t('setting_form_page.select_an_option') } </option>
@@ -79,6 +79,12 @@ export const SettingForm = ({ type, onSave, setting }) => {
                 <input className="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1
                                   ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                                   focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+
+                <div className='absolute top-3 right-0 z-0'>
+                  <svg className="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                  </svg>
+                </div>
             </div>
           </div>
 
