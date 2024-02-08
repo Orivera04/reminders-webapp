@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import { TableChats } from '../../../../src/pages/chats/components/TableChats';
 
 jest.mock('react-i18next', () => ({
@@ -20,9 +20,12 @@ jest.mock('react-router-dom', () => ({
 
 describe('TableChats', () => {
   it('renders table with chat data', async () => {
-    render(<TableChats />);
 
-    await screen.findByTestId('chat-table');
+    await act(async () => {
+      render(<TableChats />);
+    });
+
+    await screen.findByTestId('table-index');
 
     expect(screen.getByText('chat_index_page.id')).toBeTruthy();
     expect(screen.getByText('chat_index_page.name')).toBeTruthy();
@@ -42,7 +45,7 @@ describe('TableChats', () => {
 
     render(<TableChats />);
 
-    await screen.findByTestId('chat-table');
+    await screen.findByTestId('table-index');
 
     fireEvent.click(screen.getByTestId('update-button'));
 

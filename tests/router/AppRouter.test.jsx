@@ -52,7 +52,7 @@ describe('AppRouter', () => {
       );
     });
 
-    const table = screen.getByTestId('reminder-table');
+    const table = screen.getByTestId('table-index');
     expect(table).toBeTruthy();
   });
 
@@ -68,7 +68,7 @@ describe('AppRouter', () => {
       );
     });
 
-    const settingsTable = screen.getByTestId('setting-table');
+    const settingsTable = screen.getByTestId('table-index');
     expect(settingsTable).toBeTruthy();
   });
 
@@ -84,7 +84,7 @@ describe('AppRouter', () => {
       );
     });
 
-    const table = screen.getByTestId('chat-table');
+    const table = screen.getByTestId('table-index');
     expect(table).toBeTruthy();
   });
 });

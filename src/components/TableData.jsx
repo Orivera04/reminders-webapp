@@ -20,7 +20,7 @@ export const TableData = ({ translation_block, data, onDelete, onUpdate }) => {
   }
 
   return (
-    <table className='w-full sm:border sm:border-slate-200'>
+    <table className='w-full sm:border sm:border-slate-200' data-testid='table-index'>
       <thead className='hidden border-0 sm:table-header-group'>
         <tr>
           {
