@@ -50,6 +50,7 @@ export const SettingForm = ({ type, onSave, setting }) => {
                 name='token_bot_api'
                 type="text"
                 id="token"
+                data-testid="token"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1
                           ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -66,11 +67,12 @@ export const SettingForm = ({ type, onSave, setting }) => {
 
             <div className="relative mt-2.5">
               <select name='formatting_style_id'
-                          id="format"
-                          className="absolute w-full h-full inset-y-0 rounded-md border-0 bg-transparent bg-none pl-2 text-gray-900
-                                    focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm appearance-none z-10"
-                          value={ formData.formatting_style_id }
-                          onChange={ handleChange }>
+                      id="format"
+                      data-testid="formatting_style"
+                      className="absolute w-full h-full inset-y-0 rounded-md border-0 bg-transparent bg-none pl-2 text-gray-900
+                                focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm appearance-none z-10"
+                      value={ formData.formatting_style_id }
+                      onChange={ handleChange }>
                   <option>  { t('setting_form_page.select_an_option') } </option>
                   <option value={ 1 }> Markdown </option>
                   <option value={ 2 }> HTML </option>
@@ -95,6 +97,7 @@ export const SettingForm = ({ type, onSave, setting }) => {
             <div className="mt-2.5">
               <textarea name='description'
                         id="description"
+                        data-testid="description"
                         rows="4"
                         value={ formData.description }
                         onChange={ handleChange }
