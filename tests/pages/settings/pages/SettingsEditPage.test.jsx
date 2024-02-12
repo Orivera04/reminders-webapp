@@ -43,9 +43,9 @@ describe('SettingsEditPage', () => {
 
     await screen.findByText('setting_form_page.update_setting');
 
-    expect(screen.getByTestId('token').value).toBe('theToken');
-    expect(screen.getByTestId('formatting_style').value).toBe('1');
-    expect(screen.getByTestId('description').value).toBe('the description');
+    await expect(screen.getByTestId('token').value).toBe('theToken');
+    await expect(screen.getByTestId('formatting_style').value).toBe('1');
+    await expect(screen.getByTestId('description').value).toBe('the description');
   });
 
   it('submits the form with valid data', async () => {
