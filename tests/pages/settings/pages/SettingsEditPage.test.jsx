@@ -26,7 +26,7 @@ describe('SettingsEditPage', () => {
   beforeEach(() => {
     getSetting.mockResolvedValue({
       id: 1,
-      token_bot_api: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9',
+      token_bot_api: 'theToken',
       formatting_style_id: 1,
       description: 'the description'
     });
@@ -43,7 +43,7 @@ describe('SettingsEditPage', () => {
 
     await screen.findByText('setting_form_page.update_setting');
 
-    expect(screen.getByTestId('token').value).toBe('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9');
+    expect(screen.getByTestId('token').value).toBe('theToken');
     expect(screen.getByTestId('formatting_style').value).toBe('1');
     expect(screen.getByTestId('description').value).toBe('the description');
   });
