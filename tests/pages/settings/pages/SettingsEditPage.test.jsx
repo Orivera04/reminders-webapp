@@ -35,17 +35,20 @@ describe('SettingsEditPage', () => {
   });
 
   it('validate data', async () => {
-    render(
-      <MemoryRouter initialEntries={['/settings/1/edit']}>
-        <SettingsEditPage />
-      </MemoryRouter>
-    );
+    await act( async () => (
+      render(
+        <MemoryRouter initialEntries={['/settings/1/edit']}>
+          <SettingsEditPage />
+        </MemoryRouter>
+      )
+    ))
+
 
     await screen.findByText('setting_form_page.update_setting');
 
-    await expect(screen.getByTestId('token').value).toBe('theToken');
-    await expect(screen.getByTestId('formatting_style').value).toBe('1');
-    await expect(screen.getByTestId('description').value).toBe('the description');
+    expect(screen.getByTestId('token').value).toBe('theToken');
+    expect(screen.getByTestId('formatting_style').value).toBe('1');
+    expect(screen.getByTestId('description').value).toBe('the description');
   });
 
   it('submits the form with valid data', async () => {
